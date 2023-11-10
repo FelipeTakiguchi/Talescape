@@ -1,9 +1,10 @@
-import { View, Image, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Image, Text, TouchableOpacity, StyleSheet, KeyboardAvoidingView } from "react-native";
 import { useContext, useEffect, useState } from "react";
 import AuthService from "../Services/Auth";
 import { useNavigation } from "@react-navigation/native";
 import { GlobalStyles } from "../../Styles";
 import StyledButton from "../components/StyledButton";
+import StyledInput from "../components/StyledInput";
 
 export default function Login(props) {
     const [email, setEmail] = useState("");
@@ -37,20 +38,22 @@ export default function Login(props) {
     // }
 
     return (
-        <View style={GlobalStyles.center}>
-            <Image source={require('../../assets/Talescape Logo.png')} style={styles.image}/>
-            <View style={GlobalStyles.container}>
-                <Text style={[GlobalStyles.h1, styles.centralizeText]}>Welcome to Talescape</Text>
-                <View style={styles.buttonsContainer}>
-                    <StyledButton type={"sign in"}></StyledButton>
-                    <StyledButton type={"create"}></StyledButton>
+        <KeyboardAvoidingView style={{ flex: 1 }}>
+            <View style={GlobalStyles.center}>
+                <Image source={require('../../assets/Talescape Logo.png')} style={styles.image} />
+                <View style={GlobalStyles.container}>
+                    <Text style={[GlobalStyles.h1, styles.centralizeText]}>Welcome to Talescape</Text>
+                    <View style={styles.buttonsContainer}>
+                        <StyledInput value={email} set={setEmail} name={"Email"} icon={"email"}></StyledInput>
+                        <StyledInput value={password} set={setPassword} name={"Password"} icon={"key"} isSecure={true}></StyledInput>
+                    </View>
+                    <View style={styles.copyrightContainer}>
+                        <Image style={styles.copyright} source={require('../../assets/copyright.png')} alt={'Copyright icon'} />
+                        <Text style={styles.copyrightText}>All Rights Reserved</Text>
+                    </View>
                 </View>
-                <View style={styles.copyrightContainer}>
-                    <Image style={styles.copyright} source={require('../../assets/copyright.png')} alt={'Copyright icon'}/>
-                    <Text style={styles.copyrightText}>All Rights Reserved</Text>
-                </View>
-            </View>
-        </View >
+            </View >
+        </KeyboardAvoidingView>
     )
 }
 
