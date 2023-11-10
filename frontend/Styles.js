@@ -2,19 +2,22 @@ import { StyleSheet } from "react-native";
 
 const GlobalStyles = StyleSheet.create({
     center: {
-        alignItems: 'center',        
+        alignItems: 'center',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between'
     },
     container: {
-        backgroundColor: "#fcfcfc",
-        height: 500,
+        backgroundColor: "#763FEA",
         width: "100%",
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        alignContent: 'center',
+        alignItems: 'center',
     },
     h1: {
         fontSize: 27,
-        color: "#C395A6",
+        color: "#fcfcfc",
         fontWeight: '700',
     }
 });

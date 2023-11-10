@@ -14,7 +14,7 @@ export default function App() {
       <UsersProvider>
         <Stack.Navigator screenOptions={{
           headerStyle: { elevation: 0 },
-          cardStyle: { backgroundColor: '#FAEDED' }
+          cardStyle: { backgroundColor: '#2A0C5F' }
         }}>
           <Stack.Screen name="menu" options={{ headerShown: false }} component={Menu} />
           <Stack.Screen name="login" options={{ headerShown: false }} component={Login} />

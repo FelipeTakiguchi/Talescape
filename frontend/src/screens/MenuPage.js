@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import AuthService from "../Services/Auth";
 import { useNavigation } from "@react-navigation/native";
 import { GlobalStyles } from "../../Styles";
+import StyledButton from "../components/StyledButton";
 
 export default function Menu(props) {
     const navigator = useNavigation();
@@ -43,6 +44,14 @@ export default function Menu(props) {
             <Image source={require('../../assets/Talescape Logo.png')} style={styles.image}/>
             <View style={GlobalStyles.container}>
                 <Text style={[GlobalStyles.h1, styles.centralizeText]}>Welcome to Talescape</Text>
+                <View style={styles.buttonsContainer}>
+                    <StyledButton type={"sign in"}></StyledButton>
+                    <StyledButton type={"create"}></StyledButton>
+                </View>
+                <View style={styles.copyrightContainer}>
+                    <Image style={styles.copyright} source={require('../../assets/copyright.png')} alt={'Copyright icon'}/>
+                    <Text style={styles.copyrightText}>All Rights Reserved</Text>
+                </View>
             </View>
         </View >
     )
@@ -53,10 +62,31 @@ const styles = StyleSheet.create({
         marginTop: 80,
         width: 220,
         height: 180,
-        marginBottom: 80,
+        marginBottom: 50,
     },
     centralizeText: {
         textAlign: 'center',
-        marginTop: 50,
+        marginTop: 40,
+    },
+    buttonsContainer: {
+        gap: 20,
+        marginTop: 40
+    },
+    copyright: {
+        width: 13,
+        height: 13
+    },
+    copyrightContainer: {
+        flexDirection: 'row',
+        gap: 5,
+        width: '100vw',
+        justifyContent: 'flex-end',
+        marginRight: 20,
+        marginTop: 30,
+        marginBottom: 20,
+    },
+    copyrightText: {
+        color: '#fcfcfc',
+        fontSize: 10,
     }
 })

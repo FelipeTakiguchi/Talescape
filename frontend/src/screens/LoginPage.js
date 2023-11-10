@@ -2,6 +2,8 @@ import { View, Image, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useContext, useEffect, useState } from "react";
 import AuthService from "../Services/Auth";
 import { useNavigation } from "@react-navigation/native";
+import { GlobalStyles } from "../../Styles";
+import StyledButton from "../components/StyledButton";
 
 export default function Login(props) {
     const [email, setEmail] = useState("");
@@ -34,36 +36,54 @@ export default function Login(props) {
     //     }
     // }
 
-    // useEffect(() => {
-    //     const jwt = sessionStorage.getItem("token") ?? "";
-    //     if(jwt != "")
-    //         navigator.navigate("home");
-    // })
-
     return (
-        <View style={styles.center}>
+        <View style={GlobalStyles.center}>
             <Image source={require('../../assets/Talescape Logo.png')} style={styles.image}/>
-            {/* <View style={styles.form}>
-                <StyledInput name={"Email"} type={"email-address"} value={email} set={setEmail} />
-                <StyledInput isSecure={true} name={"Password"} value={password} set={setPassword} />
+            <View style={GlobalStyles.container}>
+                <Text style={[GlobalStyles.h1, styles.centralizeText]}>Welcome to Talescape</Text>
+                <View style={styles.buttonsContainer}>
+                    <StyledButton type={"sign in"}></StyledButton>
+                    <StyledButton type={"create"}></StyledButton>
+                </View>
+                <View style={styles.copyrightContainer}>
+                    <Image style={styles.copyright} source={require('../../assets/copyright.png')} alt={'Copyright icon'}/>
+                    <Text style={styles.copyrightText}>All Rights Reserved</Text>
+                </View>
             </View>
-            <View style={styles.alignLink}>
-                <Text style={styles.link} onPress={() => props.navigation.navigate('recover')}>Forgot your password?</Text>
-            </View>
-            <TouchableOpacity style={styles.primaryButton} onPress={() => ToLogin()}><Text style={styles.buttonText}>Log In</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.secondaryButton} onPress={() => navigator.navigate('cadastro')}><Text style={styles.buttonText}>Sign Up</Text></TouchableOpacity> */}
         </View >
     )
 }
 
 const styles = StyleSheet.create({
-    center: {
-        alignItems: 'center',        
-    },
     image: {
-        marginTop: 50,
-        width: 250,
-        height: 200,
+        marginTop: 80,
+        width: 220,
+        height: 180,
+        marginBottom: 50,
     },
-
+    centralizeText: {
+        textAlign: 'center',
+        marginTop: 40,
+    },
+    buttonsContainer: {
+        gap: 20,
+        marginTop: 40
+    },
+    copyright: {
+        width: 13,
+        height: 13
+    },
+    copyrightContainer: {
+        flexDirection: 'row',
+        gap: 5,
+        width: '100vw',
+        justifyContent: 'flex-end',
+        marginRight: 20,
+        marginTop: 30,
+        marginBottom: 20,
+    },
+    copyrightText: {
+        color: '#fcfcfc',
+        fontSize: 10,
+    }
 })
