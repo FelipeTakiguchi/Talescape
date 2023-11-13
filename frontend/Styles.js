@@ -8,6 +8,9 @@ const GlobalStyles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between'
     },
+    centralize: {
+        alignItems: 'center',
+    },
     container: {
         backgroundColor: "#763FEA",
         width: "100%",
@@ -19,7 +22,7 @@ const GlobalStyles = StyleSheet.create({
         fontSize: 27,
         color: "#fcfcfc",
         fontWeight: '700',
-    }
+    },
 });
 
 export { GlobalStyles };

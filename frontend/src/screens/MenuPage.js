@@ -1,6 +1,4 @@
 import { View, Image, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { useContext, useEffect, useState } from "react";
-import AuthService from "../Services/Auth";
 import { useNavigation } from "@react-navigation/native";
 import { GlobalStyles } from "../../Styles";
 import StyledButton from "../components/StyledButton";
@@ -43,10 +41,10 @@ export default function Menu(props) {
         <View style={GlobalStyles.center}>
             <Image source={require('../../assets/Talescape Logo.png')} style={styles.image}/>
             <View style={GlobalStyles.container}>
-                <Text style={[GlobalStyles.h1, styles.centralizeText]}>Welcome to Talescape</Text>
+                <Text style={[GlobalStyles.h1, styles.centralizeText]}>Welcome to Talescape!</Text>
                 <View style={styles.buttonsContainer}>
                     <StyledButton type={"sign in"}></StyledButton>
-                    <StyledButton type={"create"}></StyledButton>
+                    <StyledButton type={"create account"}></StyledButton>
                 </View>
                 <View style={styles.copyrightContainer}>
                     <Image style={styles.copyright} source={require('../../assets/copyright.png')} alt={'Copyright icon'}/>

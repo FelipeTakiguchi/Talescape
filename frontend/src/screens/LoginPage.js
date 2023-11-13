@@ -1,6 +1,5 @@
-import { View, Image, Text, TouchableOpacity, StyleSheet, KeyboardAvoidingView } from "react-native";
-import { useContext, useEffect, useState } from "react";
-import AuthService from "../Services/Auth";
+import { View, Image, Text, StyleSheet, KeyboardAvoidingView } from "react-native";
+import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { GlobalStyles } from "../../Styles";
 import StyledButton from "../components/StyledButton";
@@ -38,15 +37,16 @@ export default function Login(props) {
     // }
 
     return (
-        <KeyboardAvoidingView style={{ flex: 1 }}>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior="position">
             <View style={GlobalStyles.center}>
                 <Image source={require('../../assets/Talescape Logo.png')} style={styles.image} />
                 <View style={GlobalStyles.container}>
-                    <Text style={[GlobalStyles.h1, styles.centralizeText]}>Welcome to Talescape</Text>
+                    <Text style={[GlobalStyles.h1, styles.centralizeText]}>Sign Up</Text>
                     <View style={styles.buttonsContainer}>
                         <StyledInput value={email} set={setEmail} name={"Email"} icon={"email"}></StyledInput>
                         <StyledInput value={password} set={setPassword} name={"Password"} icon={"key"} isSecure={true}></StyledInput>
                     </View>
+                    <StyledButton type={"login"}/>
                     <View style={styles.copyrightContainer}>
                         <Image style={styles.copyright} source={require('../../assets/copyright.png')} alt={'Copyright icon'} />
                         <Text style={styles.copyrightText}>All Rights Reserved</Text>
@@ -59,10 +59,9 @@ export default function Login(props) {
 
 const styles = StyleSheet.create({
     image: {
-        marginTop: 80,
+        marginTop: 50,
         width: 220,
         height: 180,
-        marginBottom: 50,
     },
     centralizeText: {
         textAlign: 'center',
@@ -70,7 +69,8 @@ const styles = StyleSheet.create({
     },
     buttonsContainer: {
         gap: 20,
-        marginTop: 40
+        marginTop: 40,
+        marginBottom: 30,
     },
     copyright: {
         width: 13,
