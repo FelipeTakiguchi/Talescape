@@ -7,7 +7,6 @@ export default function Nav ( props ) {
     // const navigateion = useNavigation();   
     // const [modalVisible, setModalVisible] = useState(false);
 
-
     // const setVisible = () => {
     //     setModalVisible(!modalVisible);
     // }

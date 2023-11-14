@@ -54,11 +54,11 @@ const styles = StyleSheet.create({
     },
     centralizeText: {
         textAlign: 'center',
-        marginTop: 20,
+        marginTop: 15,
     },
     buttonsContainer: {
         gap: 10,
-        marginTop: 40,
+        marginTop: 20,
         marginBottom: 30,
     },
     copyright: {
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         width: '100vw',
         justifyContent: 'flex-end',
         marginRight: 20,
-        marginTop: 30,
+        marginTop: 15,
         marginBottom: 20,
     },
     copyrightText: {
