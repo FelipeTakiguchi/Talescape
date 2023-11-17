@@ -5,6 +5,7 @@ import Cadastro from './src/screens/RegisterPage';
 import { UsersProvider } from './context/UserContext.js';
 import HomePage from './src/screens/HomePage';
 import Menu from './src/screens/MenuPage';
+import ExplorePage from './src/screens/ExplorePage';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -16,6 +17,7 @@ export default function App() {
           headerStyle: { elevation: 0 },
           cardStyle: { backgroundColor: '#2A0C5F' }
         }}>
+          <Stack.Screen name="explore" options={{ headerShown: false }} component={ExplorePage} />
           <Stack.Screen name="menu" options={{ headerShown: false }} component={Menu} />
           <Stack.Screen name="login" options={{ headerShown: false }} component={Login} />
           <Stack.Screen name="cadastro" options={{ headerShown: false }} component={Cadastro} />

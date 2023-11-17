@@ -2,6 +2,7 @@ import { View, StyleSheet, Pressable, Image, Text } from "react-native"
 import { GlobalStyles } from "../../Styles"
 import StyledButton from "../components/StyledButton"
 import { useNavigation } from "@react-navigation/native";
+import StoryCard from "../components/StoryCard";
 
 export default function HomePage(props) {
 
@@ -15,20 +16,18 @@ export default function HomePage(props) {
             </Pressable>
             <View style={styles.content}>
                 <View style={styles.section}>
+                    <Pressable onPress={() => navigator.navigate("home")}>
+                        <Text style={styles.option}>Create</Text>
+                    </Pressable>
+                    <View style={styles.verticleLine}></View>
                     <Pressable>
-                        <Text style={[styles.option, styles.selected]}>Create</Text>
-                    </Pressable>
-                    <View style={styles.verticleLine}></View> 
-                    <Pressable onPress={() => navigator.navigate("explore")}>
-                        <Text style={styles.option}>Explore</Text>
+                        <Text style={[styles.option, styles.selected]}>Explore</Text>
                     </Pressable>
                 </View>
-                <View style={styles.message}>
-                    <Image source={require("../../assets/smile icon.png")} style={styles.smile}></Image>
-                    <Text style={styles.primaryMessage}>Hello Felipe,</Text>
-                    <Text style={styles.secondaryMessage}>Good to see you again</Text>
+                <View style={[styles.spaceBetween, GlobalStyles.center]}>
+                    <StoryCard></StoryCard>
+
                 </View>
-                <StyledButton type={"story"} />
             </View>
             <View style={styles.footer}>
                 <Pressable>
@@ -70,6 +69,10 @@ const styles = StyleSheet.create({
         height: "80vh",
         width: "100%",
     },
+    spaceBetween: {
+        gap: 10,
+        marginTop: 20,
+    },
     section: {
         backgroundColor: "#763FEA",
         width: "100%",
@@ -88,32 +91,12 @@ const styles = StyleSheet.create({
         fontWeight: '600'
     },
     selected: {
-        color: "#C395A6"  
+        color: "#C395A6"
     },
     verticleLine: {
         height: '100%',
         width: 1,
         backgroundColor: '#909090',
-    },
-    message: {
-        flexDirection: 'column',
-        marginLeft: 30,
-        marginTop: 55,
-    },
-    smile: {
-        width: 87,
-        height: 87,
-        marginBottom: 10
-    },
-    primaryMessage: {
-        fontSize: 24,
-        color: "#C395A6",
-        fontWeight: '700',
-    },
-    secondaryMessage: {
-        fontSize: 24,
-        color: "#D4CDCF",
-        fontWeight: '700',
     },
     footer: {
         width: "100%",
