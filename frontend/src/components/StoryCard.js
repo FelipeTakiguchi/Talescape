@@ -29,10 +29,12 @@ export default function StoryCard(props) {
             </View>
             <View style={styles.horizontalLine}></View>
             <View style={styles.bottomCard}>
-
+                <Image source={require("../../assets/heart icon.png")} style={styles.loveIcon}></Image>
+                <Text style={styles.categoryFont}>Categoria 1</Text>
+                <Text style={styles.categoryFont}>Categoria 2</Text>
             </View>
             <View style={styles.floatingTag}>
-
+                <Text style={styles.tagText}>História</Text>
             </View>
         </View>
     )
@@ -41,9 +43,9 @@ export default function StoryCard(props) {
 const styles = StyleSheet.create({
     card: {
         backgroundColor: "#7B5BBF",
-        width: 360,
-        height: 200,
-        borderRadius: 15
+        width: "80%",
+        borderRadius: 15,
+        marginBottom: 30,
     },
     topCard: {
         margin: 14,
@@ -99,9 +101,38 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     bottomCard: {
-
+        paddingLeft: 17,
+        padding: 7,
+        flexDirection: 'row',
+        gap: 8
+    },
+    loveIcon: {
+        width: 23,
+        height: 23,
+    },
+    categoryFont: {
+        marginTop: "1%",
+        color: "#fcfcfc",
+        fontSize: 12
     },
     floatingTag: {
-
+        position: 'absolute',
+        bottom: -15,
+        right: -18,
+        backgroundColor: "#fcfcfc",
+        padding: 8,
+        borderRadius: 5,
+        shadowColor: "gray",
+        shadowOffset: {
+            width: 0.8,
+            height: 6,
+        },
+        shadowRadius: 5,
+        shadowOpacity: .3        
+    },
+    tagText: {
+        color: "#170536",
+        fontSize: 18,
+        fontWeight: '700'
     }
 })

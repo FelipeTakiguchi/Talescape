@@ -1,4 +1,4 @@
-import { View, StyleSheet, Pressable, Image, Text } from "react-native"
+import { View, StyleSheet, Pressable, Image, Text, ScrollView } from "react-native"
 import { GlobalStyles } from "../../Styles"
 import StyledButton from "../components/StyledButton"
 import { useNavigation } from "@react-navigation/native";
@@ -24,10 +24,12 @@ export default function HomePage(props) {
                         <Text style={[styles.option, styles.selected]}>Explore</Text>
                     </Pressable>
                 </View>
-                <View style={[styles.spaceBetween, GlobalStyles.center]}>
+                <ScrollView contentContainerStyle={styles.scrollViewContent} centerContent={true}>
                     <StoryCard></StoryCard>
-
-                </View>
+                    <StoryCard></StoryCard>
+                    <StoryCard></StoryCard>
+                    <StoryCard></StoryCard>
+                </ScrollView>
             </View>
             <View style={styles.footer}>
                 <Pressable>
@@ -66,12 +68,12 @@ const styles = StyleSheet.create({
     content: {
         marginTop: 10,
         backgroundColor: "#EFEFEF",
-        height: "80vh",
         width: "100%",
-    },
-    spaceBetween: {
-        gap: 10,
-        marginTop: 20,
+    }, 
+    scrollViewContent: {
+        marginTop: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     section: {
         backgroundColor: "#763FEA",
@@ -101,8 +103,9 @@ const styles = StyleSheet.create({
     footer: {
         width: "100%",
         justifyContent: 'space-around',
-        marginTop: '4%',
+        alignItems: 'center',
         flexDirection: 'row',
+        height: 55,
     },
     footerIcon: {
         width: 30,
