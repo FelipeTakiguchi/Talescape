@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         gap: 8
     },
     loveIcon: {
-        width: 23,
+        width: 22,
         height: 23,
     },
     categoryFont: {

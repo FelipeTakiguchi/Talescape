@@ -4,7 +4,7 @@ import StyledButton from "../components/StyledButton"
 import { useNavigation } from "@react-navigation/native";
 import StoryCard from "../components/StoryCard";
 
-export default function HomePage(props) {
+export default function LovedPage(props) {
 
     const navigator = useNavigation();
 
@@ -15,20 +15,15 @@ export default function HomePage(props) {
                 <Image source={require("../../assets/menu icon.png")} style={styles.menuHeader} />
             </Pressable>
             <View style={styles.content}>
-                <View style={styles.section}>
-                    <Pressable onPress={() => navigator.navigate("home")}>
-                        <Text style={styles.option}>Create</Text>
-                    </Pressable>
-                    <View style={styles.verticleLine}></View>
-                    <Pressable>
-                        <Text style={[styles.option, styles.selected]}>Explore</Text>
-                    </Pressable>
+                <View style={styles.centralize}>
+                    <Image source={require("../../assets/heart button.png")} style={styles.heartIcon}></Image>
+                    <View style={styles.baseLine}></View>
                 </View>
                 <ScrollView contentContainerStyle={styles.scrollViewContent} centerContent={true}>
-                    <StoryCard></StoryCard>
-                    <StoryCard></StoryCard>
-                    <StoryCard></StoryCard>
-                    <StoryCard></StoryCard>
+                    <StoryCard loved={true} expanded={false}></StoryCard>
+                    <StoryCard loved={true} expanded={false}></StoryCard>
+                    <StoryCard loved={true} expanded={false}></StoryCard>
+                    <StoryCard loved={true} expanded={false}></StoryCard>
                 </ScrollView>
             </View>
             <View style={styles.footer}>
@@ -36,10 +31,10 @@ export default function HomePage(props) {
                     <Image source={require("../../assets/pencil icon.png")} style={styles.footerIcon}></Image>
                 </Pressable>
                 <Pressable onPress={() => navigator.navigate('loved')}>
-                    <Image source={require("../../assets/heart icon.png")} style={styles.footerIcon}></Image>
+                    <Image source={require("../../assets/heart selected icon.png")} style={styles.footerIcon}></Image>
                 </Pressable>
-                <Pressable>
-                    <Image source={require("../../assets/home selected icon.png")} style={styles.footerIcon}></Image>
+                <Pressable onPress={() => navigator.navigate('home')}>
+                    <Image source={require("../../assets/home icon.png")} style={styles.footerIcon}></Image>
                 </Pressable>
                 <Pressable onPress={() => navigator.navigate('search')}>
                     <Image source={require("../../assets/search icon.png")} style={styles.footerIcon}></Image>
@@ -71,6 +66,21 @@ const styles = StyleSheet.create({
         minHeight: '80vh',
         width: "100%",
     }, 
+    centralize: {
+        alignItems: 'center',
+        gap: 5,
+        marginTop: 10
+    },
+    heartIcon: {
+        width: 33,
+        height: 30,
+    },
+    baseLine: {
+        borderColor: "#2A0C5F",
+        borderWidth: 0,
+        borderTopWidth: 2,
+        width: 100,
+    },
     scrollViewContent: {
         marginTop: 15,
         alignItems: 'center',

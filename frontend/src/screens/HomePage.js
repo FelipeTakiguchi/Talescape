@@ -34,16 +34,16 @@ export default function HomePage(props) {
                 <Pressable>
                     <Image source={require("../../assets/pencil icon.png")} style={styles.footerIcon}></Image>
                 </Pressable>
-                <Pressable>
+                <Pressable onPress={() => navigator.navigate('loved')}>
                     <Image source={require("../../assets/heart icon.png")} style={styles.footerIcon}></Image>
                 </Pressable>
                 <Pressable>
-                    <Image source={require("../../assets/home icon.png")} style={styles.footerIcon}></Image>
+                    <Image source={require("../../assets/home selected icon.png")} style={styles.footerIcon}></Image>
                 </Pressable>
-                <Pressable>
+                <Pressable onPress={() => navigator.navigate('search')}>
                     <Image source={require("../../assets/search icon.png")} style={styles.footerIcon}></Image>
                 </Pressable>
-                <Pressable>
+                <Pressable onPress={() => navigator.navigate('editProfile')}>
                     <Image source={require("../../assets/user icon.png")} style={styles.footerIcon}></Image>
                 </Pressable>
             </View>
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     content: {
         marginTop: 10,
         backgroundColor: "#EFEFEF",
-        height: "80vh",
+        minHeight: "80vh",
         width: "100%",
     },
     section: {
