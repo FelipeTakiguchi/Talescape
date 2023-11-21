@@ -3,6 +3,7 @@ import { GlobalStyles } from "../../Styles"
 import StyledButton from "../components/StyledButton"
 import { useNavigation } from "@react-navigation/native";
 import StoryCard from "../components/StoryCard";
+import Footer from "../components/Footer";
 
 export default function LovedPage(props) {
 
@@ -20,29 +21,13 @@ export default function LovedPage(props) {
                     <View style={styles.baseLine}></View>
                 </View>
                 <ScrollView contentContainerStyle={styles.scrollViewContent} centerContent={true}>
-                    <StoryCard loved={true} expanded={false}></StoryCard>
-                    <StoryCard loved={true} expanded={false}></StoryCard>
-                    <StoryCard loved={true} expanded={false}></StoryCard>
-                    <StoryCard loved={true} expanded={false}></StoryCard>
+                    <StoryCard viewed={true} loved={true} expanded={false}></StoryCard>
+                    <StoryCard viewed={true} loved={true} expanded={false}></StoryCard>
+                    <StoryCard viewed={true} loved={true} expanded={false}></StoryCard>
+                    <StoryCard viewed={true} loved={true} expanded={false}></StoryCard>
                 </ScrollView>
             </View>
-            <View style={styles.footer}>
-                <Pressable>
-                    <Image source={require("../../assets/pencil icon.png")} style={styles.footerIcon}></Image>
-                </Pressable>
-                <Pressable onPress={() => navigator.navigate('loved')}>
-                    <Image source={require("../../assets/heart selected icon.png")} style={styles.footerIcon}></Image>
-                </Pressable>
-                <Pressable onPress={() => navigator.navigate('home')}>
-                    <Image source={require("../../assets/home icon.png")} style={styles.footerIcon}></Image>
-                </Pressable>
-                <Pressable onPress={() => navigator.navigate('search')}>
-                    <Image source={require("../../assets/search icon.png")} style={styles.footerIcon}></Image>
-                </Pressable>
-                <Pressable onPress={() => navigator.navigate('editProfile')}>
-                    <Image source={require("../../assets/user icon.png")} style={styles.footerIcon}></Image>
-                </Pressable>
-            </View>
+            <Footer page="heart"></Footer>
         </View>
     )
 }
@@ -63,7 +48,7 @@ const styles = StyleSheet.create({
     content: {
         marginTop: 10,
         backgroundColor: "#EFEFEF",
-        minHeight: '80vh',
+        height: '89vh',
         width: "100%",
     }, 
     centralize: {
@@ -72,8 +57,8 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     heartIcon: {
-        width: 33,
-        height: 30,
+        width: 30,
+        height: 31,
     },
     baseLine: {
         borderColor: "#2A0C5F",
@@ -84,7 +69,7 @@ const styles = StyleSheet.create({
     scrollViewContent: {
         marginTop: 15,
         alignItems: 'center',
-        justifyContent: 'center',
+        marginBottom: 40
     },
     section: {
         backgroundColor: "#763FEA",
@@ -111,15 +96,4 @@ const styles = StyleSheet.create({
         width: 1,
         backgroundColor: '#909090',
     },
-    footer: {
-        width: "100%",
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        flexDirection: 'row',
-        height: 55,
-    },
-    footerIcon: {
-        width: 30,
-        height: 30,
-    }
 })

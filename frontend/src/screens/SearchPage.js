@@ -3,10 +3,12 @@ import { GlobalStyles } from "../../Styles"
 import StyledButton from "../components/StyledButton"
 import { useNavigation } from "@react-navigation/native";
 import StoryCard from "../components/StoryCard";
+import Footer from "../components/Footer";
 
 export default function SearchPage(props) {
 
     const navigator = useNavigation();
+
 
     return (
         <View style={GlobalStyles.centralize}>
@@ -16,35 +18,19 @@ export default function SearchPage(props) {
             </Pressable>
             <View style={styles.content}>
                 <View style={styles.searchBox}>
-                    <TextInput style={styles.searchInput}></TextInput>
+                    <TextInput style={styles.searchInput} keyboardType={"web-search"}></TextInput>
                     <Pressable>
                         <Image source={require("../../assets/search button.png")} style={styles.search}></Image>
                     </Pressable>
                 </View>
                 <ScrollView contentContainerStyle={styles.scrollViewContent} centerContent={true}>
-                    <StoryCard loved={true} expanded={false}></StoryCard>
-                    <StoryCard></StoryCard>
+                    <StoryCard viewed={true} loved={true} expanded={false}></StoryCard>
+                    <StoryCard viewed={true}></StoryCard>
                     <StoryCard></StoryCard>
                     <StoryCard></StoryCard>
                 </ScrollView>
             </View>
-            <View style={styles.footer}>
-                <Pressable>
-                    <Image source={require("../../assets/pencil icon.png")} style={styles.footerIcon}></Image>
-                </Pressable>
-                <Pressable onPress={() => navigator.navigate('loved')}>
-                    <Image source={require("../../assets/heart icon.png")} style={styles.footerIcon}></Image>
-                </Pressable>
-                <Pressable onPress={() => navigator.navigate('home')}>
-                    <Image source={require("../../assets/home icon.png")} style={styles.footerIcon}></Image>
-                </Pressable>
-                <Pressable>
-                    <Image source={require("../../assets/search selected icon.png")} style={styles.footerIcon}></Image>
-                </Pressable>
-                <Pressable onPress={() => navigator.navigate('editProfile')}>
-                    <Image source={require("../../assets/user icon.png")} style={styles.footerIcon}></Image>
-                </Pressable>
-            </View>
+            <Footer page="search"></Footer>
         </View>
     )
 }
@@ -65,8 +51,8 @@ const styles = StyleSheet.create({
     content: {
         marginTop: 10,
         backgroundColor: "#EFEFEF",
-        minHeight: '80vh',
         width: "100%",
+        height: '89vh',
     },
     searchBox: {
         flexDirection: 'row',
@@ -78,6 +64,8 @@ const styles = StyleSheet.create({
         borderWidth: 0,
         borderBottomWidth: 3,
         borderColor: "#2A0C5F",
+        padding: 4,
+        outlineStyle: 'none'
     },
     search: {
         width: 30,
@@ -86,22 +74,11 @@ const styles = StyleSheet.create({
     scrollViewContent: {
         marginTop: 15,
         alignItems: 'center',
-        justifyContent: 'center',
+        marginBottom: 40
     },
     verticleLine: {
         height: '100%',
         width: 1,
         backgroundColor: '#909090',
     },
-    footer: {
-        width: "100%",
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        flexDirection: 'row',
-        height: 55,
-    },
-    footerIcon: {
-        width: 30,
-        height: 30,
-    }
 })

@@ -15,26 +15,26 @@ export default function StoryCard(props) {
     }
 
     return (
-        <View style={styles.card}>
+        <View style={[styles.card, props.viewed? styles.lightPurple : styles.darkPurple]}>
             <View style={styles.topCard}>
                 <Image source={require('../../assets/user icon.png')} style={styles.userIcon}></Image>
                 <Text style={styles.userName}>User Name</Text>
                 <Text style={styles.datePosition}>02/12/2002</Text>
             </View>
-            <View style={styles.horizontalLine}></View>
+            <View style={[styles.horizontalLine, props.viewed? styles.white : styles.pink]}></View>
             <View style={styles.cardContent}>
                 <Text style={styles.title}>Uma Linda História</Text>
                 <Text style={styles.text}>Calor ao nascer do Sol, dia e noite na subida da colina por onde se passaram os embriões, correntes a emergir por entre suas mãos...</Text>
                 <Image source={require("../../assets/arrowDown icon.png")} style={styles.showMore}></Image>
             </View>
-            <View style={styles.horizontalLine}></View>
+            <View style={[styles.horizontalLine, props.viewed? styles.white : styles.pink]}></View>
             <View style={styles.bottomCard}>
-                <Image source={require("../../assets/heart icon.png")} style={styles.loveIcon}></Image>
+                <Image source={props.loved? require("../../assets/heart button.png") : require("../../assets/heart icon.png")} style={styles.loveIcon}></Image>
                 <Text style={styles.categoryFont}>Categoria 1</Text>
                 <Text style={styles.categoryFont}>Categoria 2</Text>
             </View>
-            <View style={styles.floatingTag}>
-                <Text style={styles.tagText}>História</Text>
+            <View style={[styles.floatingTag, props.viewed? styles.white : styles.purple]}>
+                <Text style={[styles.tagText, props.viewed? styles.darkFont : styles.lightFont]}>História</Text>
             </View>
         </View>
     )
@@ -42,10 +42,24 @@ export default function StoryCard(props) {
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: "#7B5BBF",
         width: "80%",
         borderRadius: 15,
         marginBottom: 30,
+    },
+    lightPurple: {
+        backgroundColor: "#7B5BBF",
+    },
+    darkPurple: {
+        backgroundColor: "#170536",
+    },
+    purple: {
+        backgroundColor: "#763FEA",
+    },
+    pink: {
+        backgroundColor: "#C395A6",
+    },
+    white: {
+        backgroundColor: "#fcfcfc",
     },
     topCard: {
         margin: 14,
@@ -72,7 +86,6 @@ const styles = StyleSheet.create({
     horizontalLine: {
         width: '94%',
         marginLeft: '3%',
-        backgroundColor: "#fcfcfc",
         height: 1
     },
     cardContent: {
@@ -119,7 +132,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: -15,
         right: -18,
-        backgroundColor: "#fcfcfc",
         padding: 8,
         borderRadius: 5,
         shadowColor: "gray",
@@ -131,8 +143,13 @@ const styles = StyleSheet.create({
         shadowOpacity: .3        
     },
     tagText: {
-        color: "#170536",
         fontSize: 18,
         fontWeight: '700'
+    },
+    lightFont: {
+        color: "#fcfcfc",
+    },
+    darkFont: {
+        color: "#170536",
     }
 })

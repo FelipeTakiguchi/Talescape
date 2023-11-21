@@ -54,6 +54,10 @@ public class UserService {
         return (List<UserModel>) this.userRepository.findByName(name);
     }
 
+    public UserModel findByEmail(String email) {
+        return (UserModel) this.userRepository.findByEmail(email);
+    }
+
     public List<UserModel> findByAgeAndName(short age, String name) {
         return (List<UserModel>) this.userRepository.findByAgeAndName(age, name);
     }

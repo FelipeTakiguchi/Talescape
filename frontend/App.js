@@ -20,14 +20,14 @@ export default function App() {
           headerStyle: { elevation: 0 },
           cardStyle: { backgroundColor: '#2A0C5F' }
         }}>
-          <Stack.Screen name="editProfile" options={{ headerShown: false }} component={EditProfilePage} />
-          <Stack.Screen name="explore" options={{ headerShown: false }} component={ExplorePage} />
           <Stack.Screen name="search" options={{ headerShown: false }} component={SearchPage} />
-          <Stack.Screen name="loved" options={{ headerShown: false }} component={LovedPage} />
           <Stack.Screen name="menu" options={{ headerShown: false }} component={Menu} />
           <Stack.Screen name="login" options={{ headerShown: false }} component={Login} />
           <Stack.Screen name="cadastro" options={{ headerShown: false }} component={Cadastro} />
           <Stack.Screen name="home" options={{ headerShown: false }} component={HomePage} />
+          <Stack.Screen name="editProfile" options={{ headerShown: false }} component={EditProfilePage} />
+          <Stack.Screen name="explore" options={{ headerShown: false }} component={ExplorePage} />
+          <Stack.Screen name="loved" options={{ headerShown: false }} component={LovedPage} />
         </Stack.Navigator>
       </UsersProvider>
     </NavigationContainer>

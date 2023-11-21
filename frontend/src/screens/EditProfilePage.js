@@ -3,6 +3,7 @@ import { GlobalStyles } from "../../Styles"
 import StyledButton from "../components/StyledButton"
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
+import Footer from "../components/Footer";
 
 export default function EditProfilePage(props) {
 
@@ -27,23 +28,7 @@ export default function EditProfilePage(props) {
                 />
                 <Text style={styles.label}>Data de Nascimento</Text>
             </View>
-            <View style={styles.footer}>
-                <Pressable>
-                    <Image source={require("../../assets/pencil icon.png")} style={styles.footerIcon}></Image>
-                </Pressable>
-                <Pressable onPress={() => navigator.navigate('loved')}>
-                    <Image source={require("../../assets/heart icon.png")} style={styles.footerIcon}></Image>
-                </Pressable>
-                <Pressable onPress={() => navigator.navigate('home')}>
-                    <Image source={require("../../assets/home icon.png")} style={styles.footerIcon}></Image>
-                </Pressable>
-                <Pressable onPress={() => navigator.navigate('search')}>
-                    <Image source={require("../../assets/search icon.png")} style={styles.footerIcon}></Image>
-                </Pressable>
-                <Pressable>
-                    <Image source={require("../../assets/user selected icon.png")} style={styles.footerIcon}></Image>
-                </Pressable>
-            </View>
+            <Footer page="user"></Footer>
         </View>
     )
 }
@@ -64,7 +49,7 @@ const styles = StyleSheet.create({
     content: {
         marginTop: 10,
         backgroundColor: "#EFEFEF",
-        minHeight: '80vh',
+        height: '89vh',
         width: "100%",
     },
     label: {
