@@ -10,7 +10,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.rafael.java_api.filter.SecurityFilter;
+import com.felipe.java_api.filter.SecurityFilter;
 
 @Configuration
 @EnableWebSecurity

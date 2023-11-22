@@ -21,7 +21,7 @@ public class AuthService implements UserDetailsService {
     @Autowired
     private UserService userService;
 
-    @Value("${jwt.secret")
+    @Value("${jwt.secret}")
     private String secret;
 
     @Value("${jwt.issuer}")

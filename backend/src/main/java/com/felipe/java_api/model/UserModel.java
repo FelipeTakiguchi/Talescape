@@ -1,4 +1,4 @@
-package com.rafael.java_api.model;
+package com.felipe.java_api.model;
 
 import java.util.Collection;
 import java.util.List;

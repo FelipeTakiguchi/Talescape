@@ -1,35 +1,45 @@
-package com.felipe.java_api.config;
+package com.felipe.java_api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.rafael.java_api.filter.SecurityFilter;
+import com.felipe.java_api.model.UserModel;
+import com.felipe.java_api.service.AuthService;
+import com.felipe.java_api.service.UserService;
 
-@Configuration
-@EnableWebSecurity
-public class SecurityConfiguration {
+@RestController
+@RequestMapping("/auth")
+public class AuthController {
 
     @Autowired
-    private SecurityFilter securityFilter;
+    private UserService userService;
 
-    @Bean
-    public SecurityFilterChain setSecurityFilterChain(final HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity
-                .csrf(csrf -> csrf.disable())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        .anyRequest()
-                        .authenticated())
-                .addFilterBefore(this.securityFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+    @Autowired
+    private AuthService authService;
+
+    @PostMapping("/login")
+    public String login(@RequestBody UserModel user) {
+        var resp = this.userService.findByEmail(user.getEmail());
+        if (resp != null) {
+            if (resp.getPassword().equals(user.getPassword())) {
+                return authService.createToken(user);
+            }
+            return "Senha incorreta";
+        }
+        return "Usuário não encontrado";
+    }
+
+    @PostMapping("/validate")
+    public String validate(@RequestHeader("Authorization") String token) {
+        final var validate = this.authService.validateToken(token.replace("Bearer ", ""));
+        if (!validate.isBlank()) {
+            return validate;
+        }
+        return "token not valid";
     }
 
 }

@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     content: {
         marginTop: 10,
         backgroundColor: "#EFEFEF",
-        height: '89vh',
+        height: '90vh',
         width: "100%",
     },
     section: {
