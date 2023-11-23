@@ -40,10 +40,16 @@ export default function StyledButton(props) {
             )
         case "story":
             return (
-                <Pressable style={styles.buttonPink} onPress={() => navigate.navigate('login')}>
+                <Pressable style={styles.buttonPink} onPress={() => navigate.navigate('createPoem')}>
                     <Text style={styles.buttonPinkText}>
                         Create a Story
                     </Text>
+                </Pressable>
+            )
+        case "save":
+            return(  
+                <Pressable style={styles.filledButton} onPress={() => navigate.navigate('home')}>
+                    <Text style={styles.filledButtonText}>Salvar</Text>
                 </Pressable>
             )
     }
@@ -77,5 +83,15 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         padding: 12,
         textAlign: 'center'
+    },
+    filledButton: {
+        backgroundColor: "#7B5BBF",
+        padding: 10,
+        borderRadius: 15,
+    },
+    filledButtonText: {
+        fontSize: 18,
+        fontWeight: '600',
+        color: "#fcfcfc",
     },
 })

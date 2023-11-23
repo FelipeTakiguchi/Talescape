@@ -2,7 +2,7 @@ import { View, StyleSheet, Pressable, Image, Text, ScrollView } from "react-nati
 import { GlobalStyles } from "../../Styles"
 import StyledButton from "../components/StyledButton"
 import { useNavigation } from "@react-navigation/native";
-import StoryCard from "../components/StoryCard";
+import PoemCard from "../components/PoemCard";
 import Footer from "../components/Footer";
 
 export default function LovedPage(props) {
@@ -21,10 +21,10 @@ export default function LovedPage(props) {
                     <View style={styles.baseLine}></View>
                 </View>
                 <ScrollView contentContainerStyle={styles.scrollViewContent} centerContent={true}>
-                    <StoryCard viewed={true} loved={true} expanded={false}></StoryCard>
-                    <StoryCard viewed={true} loved={true} expanded={false}></StoryCard>
-                    <StoryCard viewed={true} loved={true} expanded={false}></StoryCard>
-                    <StoryCard viewed={true} loved={true} expanded={false}></StoryCard>
+                    <PoemCard viewed={true} loved={true} expanded={false}></PoemCard>
+                    <PoemCard viewed={true} loved={true} expanded={false}></PoemCard>
+                    <PoemCard viewed={true} loved={true} expanded={false}></PoemCard>
+                    <PoemCard viewed={true} loved={true} expanded={false}></PoemCard>
                 </ScrollView>
             </View>
             <Footer page="heart"></Footer>

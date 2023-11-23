@@ -1,14 +1,13 @@
-import { View, StyleSheet, Pressable, Image, Text, ScrollView, TextInput } from "react-native"
+import { View, StyleSheet, Pressable, Image, Text, ScrollView, TextInput, Dimensions } from "react-native"
 import { GlobalStyles } from "../../Styles"
 import StyledButton from "../components/StyledButton"
 import { useNavigation } from "@react-navigation/native";
-import StoryCard from "../components/StoryCard";
+import PoemCard from "../components/PoemCard";
 import Footer from "../components/Footer";
 
 export default function SearchPage(props) {
 
     const navigator = useNavigation();
-
 
     return (
         <View style={GlobalStyles.centralize}>
@@ -24,10 +23,10 @@ export default function SearchPage(props) {
                     </Pressable>
                 </View>
                 <ScrollView contentContainerStyle={styles.scrollViewContent} centerContent={true}>
-                    <StoryCard viewed={true} loved={true} expanded={false}></StoryCard>
-                    <StoryCard viewed={true}></StoryCard>
-                    <StoryCard></StoryCard>
-                    <StoryCard></StoryCard>
+                    <PoemCard viewed={true} loved={true} expanded={false}></PoemCard>
+                    <PoemCard viewed={true}></PoemCard>
+                    <PoemCard></PoemCard>
+                    <PoemCard></PoemCard>
                 </ScrollView>
             </View>
             <Footer page="search"></Footer>

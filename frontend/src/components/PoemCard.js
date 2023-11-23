@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Image, Pressable, StyleSheet, View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-export default function StoryCard(props) {
+export default function PoemCard(props) {
     const navigateion = useNavigation();
     const [modalVisible, setModalVisible] = useState(false);
 

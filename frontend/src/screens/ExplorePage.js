@@ -2,10 +2,10 @@ import { View, StyleSheet, Pressable, Image, Text, ScrollView } from "react-nati
 import { GlobalStyles } from "../../Styles"
 import StyledButton from "../components/StyledButton"
 import { useNavigation } from "@react-navigation/native";
-import StoryCard from "../components/StoryCard";
+import PoemCard from "../components/PoemCard";
 import Footer from "../components/Footer";
 
-export default function HomePage(props) {
+export default function ExplorePage(props) {
 
     const navigator = useNavigation();
 
@@ -26,10 +26,10 @@ export default function HomePage(props) {
                     </Pressable>
                 </View>
                 <ScrollView contentContainerStyle={styles.scrollViewContent} centerContent={true}>
-                    <StoryCard viewed={true}></StoryCard>
-                    <StoryCard></StoryCard>
-                    <StoryCard></StoryCard>
-                    <StoryCard viewed={true}></StoryCard>
+                    <PoemCard viewed={true}></PoemCard>
+                    <PoemCard></PoemCard>
+                    <PoemCard></PoemCard>
+                    <PoemCard viewed={true}></PoemCard>
                 </ScrollView>
             </View>
             <Footer page="home"></Footer>

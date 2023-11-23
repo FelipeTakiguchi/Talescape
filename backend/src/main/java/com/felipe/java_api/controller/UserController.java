@@ -1,5 +1,6 @@
 package com.felipe.java_api.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     public void putUser(@RequestBody UserModel newUser, @PathVariable String id) {
-        userService.save((String) id, (String) newUser.getName(), (short) newUser.getAge());
+        userService.save((String) id, (String) newUser.getName(), (Date) newUser.getDateOfBirth(), (String) newUser.getBiograpy());
     }
 
     @DeleteMapping("/{id}")

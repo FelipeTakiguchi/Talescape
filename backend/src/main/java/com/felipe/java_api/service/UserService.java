@@ -1,5 +1,6 @@
 package com.felipe.java_api.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,8 @@ public class UserService {
         return this.userRepository.save(userModel);
     }
 
-    public void save(String id, String name, short age) {
-        this.userRepository.save(new UserModel(id, name, age));
+    public void save(String id, String name, Date dateOfBirth, String biograpy) {
+        this.userRepository.save(new UserModel(id, name, dateOfBirth, biograpy));
     }
 
     public List<UserModel> findAll() {
