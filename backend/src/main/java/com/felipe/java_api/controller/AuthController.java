@@ -21,9 +21,25 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    @PostMapping("/register")
+    public String register(@RequestBody UserModel user) {
+        System.out.println("------------------------------- " + user);
+        try {
+            this.userService.save(user);
+        } catch (Exception e) {
+            System.out.println("Erro ocorrido: " + e);
+            return e.getMessage();
+        }
+
+        return "Usuário criado com sucesso";
+    }
+
     @PostMapping("/login")
     public String login(@RequestBody UserModel user) {
+        System.out.println(userService.findAll());
+
         var resp = this.userService.findByEmail(user.getEmail());
+        
         if (resp != null) {
             if (resp.getPassword().equals(user.getPassword())) {
                 return authService.createToken(user);

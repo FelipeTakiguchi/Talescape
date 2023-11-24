@@ -17,11 +17,11 @@ export default function Cadastro(props) {
         navigator.navigate('login');
     }
 
-    // useEffect(() => {
-    //     const jwt = sessionStorage.getItem("token") ?? "";
-    //     if(jwt != "")
-    //         navigator.navigate("home");
-    // })
+    useEffect(() => {
+        const jwt = sessionStorage.getItem("token") ?? "";
+        if (jwt != "")
+            navigator.navigate("home");
+    })
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior="position">
@@ -35,7 +35,7 @@ export default function Cadastro(props) {
                         <StyledInput value={password} set={setPassword} name={"Password"} icon={"key"} isSecure={true}></StyledInput>
                         <StyledInput value={confirmPassword} set={setConfirmPassword} name={"Confirm Password"} icon={"lockpad"} isSecure={true}></StyledInput>
                     </View>
-                    <StyledButton type={"create"} />
+                    <StyledButton type={"create"} username={username} email={email} password={password} confirmPassword={confirmPassword}/>
                     <View style={styles.copyrightContainer}>
                         <Image style={styles.copyright} source={require('../../assets/copyright.png')} alt={'Copyright icon'} />
                         <Text style={styles.copyrightText}>All Rights Reserved</Text>

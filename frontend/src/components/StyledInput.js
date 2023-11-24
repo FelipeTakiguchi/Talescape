@@ -1,7 +1,6 @@
 import { TextInput, View, StyleSheet, Image, KeyboardAvoidingView } from "react-native";
 
 export default function StyledInput(props) {
-    console.log(props)
 
     return (
         <View style={styles.inputContainer}>

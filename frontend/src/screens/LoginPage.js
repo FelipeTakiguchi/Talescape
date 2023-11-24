@@ -11,31 +11,6 @@ export default function Login(props) {
 
     const navigator = useNavigation();
 
-    // async function ToLogin() {
-    //     const body = {
-    //         email,
-    //         password
-    //     }
-    //     const res = await AuthService.login(body);
-
-    //     if(res.status === 200){
-    //         if(res.data.valid){
-    //             sessionStorage.setItem('token', res.data.token)
-    //             navigator.navigate("home");
-    //             return;
-    //         }
-    //         if(!res.data.valid){
-    //             const tokenBody= {
-    //                 jwtUser: res.data.token
-    //             }
-    //             await AuthService.sendToken(tokenBody);
-    //             navigator.navigate("confirm", { jwt: res.data.token });
-    //         }
-
-    //         // props.navigation.navigate("home");
-    //     }
-    // }
-
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior="position">
             <View style={GlobalStyles.center}>
@@ -46,7 +21,7 @@ export default function Login(props) {
                         <StyledInput value={email} set={setEmail} name={"Email"} icon={"email"}></StyledInput>
                         <StyledInput value={password} set={setPassword} name={"Password"} icon={"key"} isSecure={true}></StyledInput>
                     </View>
-                    <StyledButton type={"login"}/>
+                    <StyledButton type={"login"} email={email} password={password}/>
                     <View style={styles.copyrightContainer}>
                         <Image style={styles.copyright} source={require('../../assets/copyright.png')} alt={'Copyright icon'} />
                         <Text style={styles.copyrightText}>All Rights Reserved</Text>
