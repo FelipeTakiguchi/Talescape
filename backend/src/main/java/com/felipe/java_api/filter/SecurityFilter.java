@@ -32,7 +32,6 @@ public class SecurityFilter extends OncePerRequestFilter {
         if (anAuthToken != null) {
 
             final var aToken = anAuthToken.replace("Bearer ", "");
-
             final var anUsername = this.authService.validateToken(aToken);
 
             final var anUser = this.authService.loadUserByUsername(anUsername);

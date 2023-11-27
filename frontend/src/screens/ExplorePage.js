@@ -1,13 +1,30 @@
 import { View, StyleSheet, Pressable, Image, Text, ScrollView } from "react-native"
 import { GlobalStyles } from "../../Styles"
-import StyledButton from "../components/StyledButton"
 import { useNavigation } from "@react-navigation/native";
 import PoemCard from "../components/PoemCard";
 import Footer from "../components/Footer";
+import StoryService from "../Services/Story";
+import { useEffect, useReducer, useState } from "react";
 
 export default function ExplorePage(props) {
-
+    const [content, setContent] = useState([]);
     const navigator = useNavigation();
+
+    useEffect(() => {
+        loadContent()
+    }, [])
+
+    async function loadContent() {
+        const res = await StoryService.getAll();
+
+        if (res.status != 200) {
+            navigator.navigate("home");
+        }
+        if (res.data) {
+            setContent(res.data)
+            console.log(res.data);
+        }
+    }
 
     return (
         <View style={GlobalStyles.centralize}>
@@ -26,10 +43,13 @@ export default function ExplorePage(props) {
                     </Pressable>
                 </View>
                 <ScrollView contentContainerStyle={styles.scrollViewContent} centerContent={true}>
-                    <PoemCard viewed={true}></PoemCard>
-                    <PoemCard></PoemCard>
-                    <PoemCard></PoemCard>
-                    <PoemCard viewed={true}></PoemCard>
+                    {
+                        content.map((content, key) => {
+                            return(
+                                <PoemCard key={key} title={content.title} text={content.text}></PoemCard>
+                            )
+                        })
+                    }
                 </ScrollView>
             </View>
             <Footer page="home"></Footer>
@@ -55,7 +75,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#EFEFEF",
         height: '90vh',
         width: "100%",
-    }, 
+    },
     scrollViewContent: {
         marginTop: 15,
         alignItems: 'center',

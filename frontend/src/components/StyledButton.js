@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AuthService from "../Services/Auth";
+import StoryService from "../Services/Story";
 
 export default function StyledButton(props) {
     console.log(props.type)
@@ -15,12 +16,12 @@ export default function StyledButton(props) {
         if (!validateData())
             return;
 
-        const username = props.username
+        const name = props.username
         const email = props.email
         const password = props.password
 
         const body = {
-            username,
+            name,
             email,
             password
         }
@@ -54,7 +55,8 @@ export default function StyledButton(props) {
 
         if (res.data) {
             // if(res.data.valid){
-            sessionStorage.setItem('token', res.data.token)
+            sessionStorage.setItem("token", res.data)
+            console.log(sessionStorage.getItem("token"));
             navigate.navigate("home");
             //     return;
             // }
@@ -66,6 +68,33 @@ export default function StyledButton(props) {
             //     await AuthService.sendToken(tokenBody);
             //     navigate.navigate("confirm", { jwt: res.data.token });
             // }
+        }
+    }
+
+    async function createStory() {
+        const title = props.title
+        const text = props.text
+        const idOwner = {
+            "id": sessionStorage.getItem('token')
+        };
+        const viewed = false
+        const createdAt = new Date()
+        const updatedAt = new Date()
+
+        const body = {
+            title,
+            text,
+            idOwner,
+            viewed,
+            createdAt,
+            updatedAt
+        }
+
+        const res = await StoryService.create(body);
+        console.log(res);
+
+        if (res.status === 200) {
+            navigate.navigate("home");
         }
     }
 
@@ -112,7 +141,7 @@ export default function StyledButton(props) {
             )
         case "save":
             return (
-                <Pressable style={styles.filledButton} onPress={() => navigate.navigate('home')}>
+                <Pressable style={styles.filledButton} onPress={() => createStory()}>
                     <Text style={styles.filledButtonText}>Salvar</Text>
                 </Pressable>
             )

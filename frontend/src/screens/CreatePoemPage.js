@@ -7,7 +7,8 @@ import StyledButton from "../components/StyledButton";
 export default function CreatePoemPage(props) {
 
     const navigator = useNavigation();
-    const [bio, setBio] = useState("");
+    const [title, setTitle] = useState("");
+    const [text, setText] = useState("");
 
     return (
         <View style={GlobalStyles.centralize}>
@@ -15,18 +16,18 @@ export default function CreatePoemPage(props) {
                 <Pressable onPress={() => navigator.navigate('home')}>
                 <Image source={require("../../assets/back button.png")} style={styles.back}></Image>
                 </Pressable>
-                <StyledButton type={"save"}></StyledButton>
+                <StyledButton type={"save"} title={title} text={text}></StyledButton>
             </View>
             <View style={styles.content}>
                 <View style={styles.centralize}>
-                <TextInput placeholder="Título" style={styles.titulo}></TextInput>
+                <TextInput placeholder="Título" style={styles.titulo} value={title} onChangeText={setTitle}></TextInput>
                 </View>
                 <TextInput
                     style={styles.textArea}
                     multiline
                     numberOfLines={20}
-                    value={bio}
-                    onChangeText={setBio}
+                    value={text}
+                    onChangeText={setText}
                 />
             </View>
         </View>

@@ -33,7 +33,7 @@ public class AuthService implements UserDetailsService {
             final var anAlgorithm = Algorithm.HMAC256(secret);
             final String aToken = JWT.create()
                     .withIssuer(issuer)
-                    .withSubject(user.getEmail())
+                    .withSubject(user.getId())
                     .withExpiresAt(new Date(new Date().getTime() + 24 * 60 * 60 * 1000))
                     .sign(anAlgorithm);
             return aToken;
@@ -54,6 +54,7 @@ public class AuthService implements UserDetailsService {
                     .build()
                     .verify(token);
             final var anSubject = decoded.getSubject();
+            System.out.println(anSubject);
             return anSubject;
         } catch (Exception e) {
             return "";
@@ -62,6 +63,7 @@ public class AuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println(username);
         UserModel resp = this.userService.findByEmail(username);
         if (resp.getEmail().equals(username)) {
             return resp;

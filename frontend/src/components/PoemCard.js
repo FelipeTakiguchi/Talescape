@@ -23,8 +23,8 @@ export default function PoemCard(props) {
             </View>
             <View style={[styles.horizontalLine, props.viewed? styles.white : styles.pink]}></View>
             <View style={styles.cardContent}>
-                <Text style={styles.title}>Uma Linda História</Text>
-                <Text style={styles.text}>Calor ao nascer do Sol, dia e noite na subida da colina por onde se passaram os embriões, correntes a emergir por entre suas mãos...</Text>
+                <Text style={styles.title}>{props.title}</Text>
+                <Text style={styles.text}>{props.text}</Text>
                 <Image source={require("../../assets/arrowDown icon.png")} style={styles.showMore}></Image>
             </View>
             <View style={[styles.horizontalLine, props.viewed? styles.white : styles.pink]}></View>
