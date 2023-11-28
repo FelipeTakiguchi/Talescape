@@ -3,22 +3,19 @@ import { GlobalStyles } from "../../Styles"
 import StyledButton from "../components/StyledButton"
 import { useNavigation } from "@react-navigation/native";
 import Footer from "../components/Footer";
+import PopupMenu from "../components/Menu";
 
 export default function HomePage(props) {
     const navigator = useNavigation();
 
     return (
         <View style={GlobalStyles.centralize}>
-            <Image source={require("../../assets/Talescape Simple Logo.png")} style={styles.imageHeader} />
-            <Pressable style={styles.menuHeader}>
-                <Image source={require("../../assets/menu icon.png")} style={styles.menuHeader} />
-            </Pressable>
             <View style={styles.content}>
                 <View style={styles.section}>
                     <Pressable>
                         <Text style={[styles.option, styles.selected]}>Create</Text>
                     </Pressable>
-                    <View style={styles.verticleLine}></View> 
+                    <View style={styles.verticleLine}></View>
                     <Pressable onPress={() => navigator.navigate("explore")}>
                         <Text style={styles.option}>Explore</Text>
                     </Pressable>
@@ -36,17 +33,13 @@ export default function HomePage(props) {
 }
 
 const styles = StyleSheet.create({
+    alignHeader: {
+        flexDirection: 'row',
+    },
     imageHeader: {
         width: 175,
         height: 48,
         marginTop: 15,
-    },
-    menuHeader: {
-        width: 33,
-        height: 18,
-        position: 'absolute',
-        right: 11,
-        top: 16
     },
     content: {
         marginTop: 10,
@@ -72,7 +65,7 @@ const styles = StyleSheet.create({
         fontWeight: '600'
     },
     selected: {
-        color: "#C395A6"  
+        color: "#C395A6"
     },
     verticleLine: {
         height: '100%',

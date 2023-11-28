@@ -42,7 +42,7 @@ public class AuthController {
         
         if (resp != null) {
             if (resp.getPassword().equals(user.getPassword())) {
-                return authService.createToken(user);
+                return authService.createToken(resp);
             }
             return "Senha incorreta";
         }

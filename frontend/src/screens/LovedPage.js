@@ -11,10 +11,6 @@ export default function LovedPage(props) {
 
     return (
         <View style={GlobalStyles.centralize}>
-            <Image source={require("../../assets/Talescape Simple Logo.png")} style={styles.imageHeader} />
-            <Pressable style={styles.menuHeader}>
-                <Image source={require("../../assets/menu icon.png")} style={styles.menuHeader} />
-            </Pressable>
             <View style={styles.content}>
                 <View style={styles.centralize}>
                     <Image source={require("../../assets/heart button.png")} style={styles.heartIcon}></Image>

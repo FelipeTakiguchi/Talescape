@@ -12,8 +12,9 @@ export default function Cadastro(props) {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
+    const navigator = useNavigation();
+    
     function ToLogin() {
-        const navigator = useNavigation();
         navigator.navigate('login');
     }
 

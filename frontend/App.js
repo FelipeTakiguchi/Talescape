@@ -10,6 +10,7 @@ import EditProfilePage from './src/screens/EditProfilePage';
 import SearchPage from './src/screens/SearchPage';
 import LovedPage from './src/screens/LovedPage';
 import CreatePoemPage from './src/screens/CreatePoemPage';
+import HeaderComponent from './src/components/HeaderComponent';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -18,18 +19,19 @@ export default function App() {
     <NavigationContainer >
       <UsersProvider>
         <Stack.Navigator screenOptions={{
+          header: () => <HeaderComponent></HeaderComponent>,
           headerStyle: { elevation: 0 },
           cardStyle: { backgroundColor: '#2A0C5F' }
         }}>
           <Stack.Screen name="menu" options={{ headerShown: false }} component={Menu} />
           <Stack.Screen name="login" options={{ headerShown: false }} component={Login} />
           <Stack.Screen name="cadastro" options={{ headerShown: false }} component={Cadastro} />
-          <Stack.Screen name="home" options={{ headerShown: false }} component={HomePage} />
+          <Stack.Screen name="home" component={HomePage} />
           <Stack.Screen name="editProfile" options={{ headerShown: false }} component={EditProfilePage} />
-          <Stack.Screen name="explore" options={{ headerShown: false }} component={ExplorePage} />
-          <Stack.Screen name="loved" options={{ headerShown: false }} component={LovedPage} />
+          <Stack.Screen name="explore" component={ExplorePage} />
+          <Stack.Screen name="loved" component={LovedPage} />
           <Stack.Screen name="createPoem" options={{ headerShown: false }} component={CreatePoemPage} />
-          <Stack.Screen name="search" options={{ headerShown: false }} component={SearchPage} />
+          <Stack.Screen name="search" component={SearchPage} />
         </Stack.Navigator>
       </UsersProvider>
     </NavigationContainer>

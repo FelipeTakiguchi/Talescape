@@ -29,7 +29,6 @@ public class AuthService implements UserDetailsService {
 
     public String createToken(UserModel user) {
         try {
-
             final var anAlgorithm = Algorithm.HMAC256(secret);
             final String aToken = JWT.create()
                     .withIssuer(issuer)
@@ -63,9 +62,8 @@ public class AuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println(username);
-        UserModel resp = this.userService.findByEmail(username);
-        if (resp.getEmail().equals(username)) {
+        UserModel resp = this.userService.findById(username);
+        if (resp!= null) {
             return resp;
         } else {
             throw new UsernameNotFoundException("User not found");

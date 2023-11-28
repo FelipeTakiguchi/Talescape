@@ -2,8 +2,10 @@ package com.felipe.java_api.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.felipe.java_api.model.UserModel;
@@ -41,6 +43,14 @@ public class UserService {
 
     public UserModel save(UserModel userModel) {
         return this.userRepository.save(userModel);
+    }
+
+    public UserModel findById(String id) {
+        var resp =  this.userRepository.findById(id);
+        if(!resp.isEmpty()){
+            return new UserModel(resp.toString());
+        }
+        throw new UsernameNotFoundException("User not found");
     }
 
     public void save(String id, String name, Date dateOfBirth, String biograpy) {
