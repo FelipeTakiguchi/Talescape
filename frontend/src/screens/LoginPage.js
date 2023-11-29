@@ -1,5 +1,5 @@
 import { View, Image, Text, StyleSheet, KeyboardAvoidingView } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { GlobalStyles } from "../../Styles";
 import StyledButton from "../components/StyledButton";
@@ -10,6 +10,12 @@ export default function Login(props) {
     const [password, setPassword] = useState("");
 
     const navigator = useNavigation();
+
+    useEffect(() => {
+        const jwt = sessionStorage.getItem("token") ?? "";
+        if (jwt != "")
+            navigator.navigate("home");
+    })
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior="position">

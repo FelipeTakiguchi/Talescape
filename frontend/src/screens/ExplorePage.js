@@ -41,8 +41,9 @@ export default function ExplorePage(props) {
                 <ScrollView contentContainerStyle={styles.scrollViewContent} centerContent={true}>
                     {
                         content.map((content, key) => {
+                            console.log(content);
                             return(
-                                <PoemCard key={key} title={content.title} text={content.text}></PoemCard>
+                                <PoemCard key={key} title={content.title} text={content.text} owner={content.idOwner.name} updatedAt={content.updatedAt}></PoemCard>
                             )
                         })
                     }

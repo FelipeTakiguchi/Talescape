@@ -18,8 +18,8 @@ export default function PoemCard(props) {
         <View style={[styles.card, props.viewed? styles.lightPurple : styles.darkPurple]}>
             <View style={styles.topCard}>
                 <Image source={require('../../assets/user icon.png')} style={styles.userIcon}></Image>
-                <Text style={styles.userName}>User Name</Text>
-                <Text style={styles.datePosition}>02/12/2002</Text>
+                <Text style={styles.userName}>{props.owner}</Text>
+                <Text style={styles.datePosition}>{props.updatedAt}</Text>
             </View>
             <View style={[styles.horizontalLine, props.viewed? styles.white : styles.pink]}></View>
             <View style={styles.cardContent}>

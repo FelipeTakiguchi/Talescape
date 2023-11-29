@@ -74,6 +74,18 @@ public class StoryModel {
         this.updatedAt = updatedAt;
     }
 
+    public StoryModel(StoryModel story) {
+        this.title = story.getTitle();
+        this.text = story.getText();
+        this.elements = story.getElements();
+        this.category = story.getCategory();
+        this.subCategories = story.getSubCategories();
+        this.viewed = story.getViewed();
+        this.likes = story.getLikes();
+        this.createdAt = story.getCreatedAt();
+        this.updatedAt = story.getUpdatedAt();
+    }
+
     public StoryModel(String title, String text, String category, Date createdAt, Date updatedAt) {
         this.title = title;
         this.text = text;
