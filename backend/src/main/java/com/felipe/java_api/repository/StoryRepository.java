@@ -4,6 +4,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
 import com.felipe.java_api.model.StoryModel;
+import com.felipe.java_api.model.UserModel;
+
 import java.util.List;
 
 public interface StoryRepository extends MongoRepository<StoryModel, String> {
@@ -29,6 +31,9 @@ public interface StoryRepository extends MongoRepository<StoryModel, String> {
 
     // quantity: { $in: [20, 50] } } -> quantidade dentro dos valores do array 20 ou
     // 50
+
+    @Query("{'idOwner.id': ?0}")
+    List<StoryModel> findByIdOwner(String id);
 
     @Query("{'title': ?0}")
     List<StoryModel> findByTitle(String title);

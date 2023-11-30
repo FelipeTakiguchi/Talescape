@@ -53,6 +53,10 @@ public class StoryService {
         return (List<StoryModel>) this.storyRepository.findAll();
     }
 
+    public List<StoryModel> findByIdOwner(String idOwner) {
+        return (List<StoryModel>) this.storyRepository.findByIdOwner(idOwner);
+    }
+
     public List<StoryModel> findByTitle(String title) {
         return (List<StoryModel>) this.storyRepository.findByTitle(title);
     }

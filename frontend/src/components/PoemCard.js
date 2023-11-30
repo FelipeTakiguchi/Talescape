@@ -14,33 +14,57 @@ export default function PoemCard(props) {
         navigateion.navigate(screen);
     }
 
+    if (props.personal) {
+        return (
+            <View style={[styles.personalCard, props.viewed ? styles.lightPurple : styles.darkPurple]}>
+                <View style={styles.cardContent}>
+                    <Text style={styles.title}>{props.title}</Text>
+                    <Text style={styles.datePosition}>{props.updatedAt}</Text>
+                    <Text style={styles.text}>{props.text}</Text>
+                </View>
+                <View style={[styles.floatingTag, styles.middle, props.viewed ? styles.white : styles.purple]}>
+                    <Text style={[styles.tagText, props.viewed ? styles.darkFont : styles.lightFont]}>História</Text>
+                </View>
+                <Pressable style={[styles.floatingTag, styles.right, props.viewed ? styles.white : styles.purple]}>
+                    <Image source={require("../../assets/trash icon.png")} style={styles.floatingDeleteButton}></Image>
+                </Pressable>
+            </View>
+        )
+    }
+
     return (
-        <View style={[styles.card, props.viewed? styles.lightPurple : styles.darkPurple]}>
+        <View style={[styles.card, props.viewed ? styles.lightPurple : styles.darkPurple]}>
             <View style={styles.topCard}>
                 <Image source={require('../../assets/user icon.png')} style={styles.userIcon}></Image>
                 <Text style={styles.userName}>{props.owner}</Text>
                 <Text style={styles.datePosition}>{props.updatedAt}</Text>
             </View>
-            <View style={[styles.horizontalLine, props.viewed? styles.white : styles.pink]}></View>
+            <View style={[styles.horizontalLine, props.viewed ? styles.white : styles.pink]}></View>
             <View style={styles.cardContent}>
                 <Text style={styles.title}>{props.title}</Text>
                 <Text style={styles.text}>{props.text}</Text>
                 <Image source={require("../../assets/arrowDown icon.png")} style={styles.showMore}></Image>
             </View>
-            <View style={[styles.horizontalLine, props.viewed? styles.white : styles.pink]}></View>
+            <View style={[styles.horizontalLine, props.viewed ? styles.white : styles.pink]}></View>
             <View style={styles.bottomCard}>
-                <Image source={props.loved? require("../../assets/heart button.png") : require("../../assets/heart icon.png")} style={styles.loveIcon}></Image>
+                <Image source={props.loved ? require("../../assets/heart button.png") : require("../../assets/heart icon.png")} style={styles.loveIcon}></Image>
                 <Text style={styles.categoryFont}>Categoria 1</Text>
                 <Text style={styles.categoryFont}>Categoria 2</Text>
             </View>
-            <View style={[styles.floatingTag, props.viewed? styles.white : styles.purple]}>
-                <Text style={[styles.tagText, props.viewed? styles.darkFont : styles.lightFont]}>História</Text>
+            <View style={[styles.floatingTag, styles.right, props.viewed ? styles.white : styles.purple]}>
+                <Text style={[styles.tagText, props.viewed ? styles.darkFont : styles.lightFont]}>História</Text>
             </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    personalCard: {
+        width: "80%",
+        borderRadius: 15,
+        marginBottom: 30,
+        paddingBottom: 30,
+    },
     card: {
         width: "80%",
         borderRadius: 15,
@@ -130,8 +154,6 @@ const styles = StyleSheet.create({
     },
     floatingTag: {
         position: 'absolute',
-        bottom: -15,
-        right: -18,
         padding: 8,
         borderRadius: 5,
         shadowColor: "gray",
@@ -140,7 +162,15 @@ const styles = StyleSheet.create({
             height: 6,
         },
         shadowRadius: 5,
-        shadowOpacity: .3        
+        shadowOpacity: .3
+    },
+    right: {
+        bottom: -15,
+        right: -18,
+    },
+    middle: {
+        bottom: -15,
+        left: "36%"
     },
     tagText: {
         fontSize: 18,
@@ -151,5 +181,9 @@ const styles = StyleSheet.create({
     },
     darkFont: {
         color: "#170536",
+    },
+    floatingDeleteButton: {
+        width: 20,
+        height: 25,
     }
 })

@@ -11,6 +11,7 @@ import SearchPage from './src/screens/SearchPage';
 import LovedPage from './src/screens/LovedPage';
 import CreatePoemPage from './src/screens/CreatePoemPage';
 import HeaderComponent from './src/components/HeaderComponent';
+import EditPoemsListPage from './src/screens/EditPoemsListPage';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -27,6 +28,7 @@ export default function App() {
           <Stack.Screen name="login" options={{ headerShown: false }} component={Login} />
           <Stack.Screen name="cadastro" options={{ headerShown: false }} component={Cadastro} />
           <Stack.Screen name="home" component={HomePage} />
+          <Stack.Screen name="myPoems" component={EditPoemsListPage} />
           <Stack.Screen name="editProfile" options={{ headerShown: false }} component={EditProfilePage} />
           <Stack.Screen name="explore" component={ExplorePage} />
           <Stack.Screen name="loved" component={LovedPage} />

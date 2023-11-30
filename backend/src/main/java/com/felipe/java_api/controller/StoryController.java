@@ -40,8 +40,18 @@ public class StoryController {
         return listRes;
     }
 
+    @GetMapping("/myPoems")
+    public List<StoryModel> getStoryByUser(@RequestHeader("Authorization") String token) {
+        System.out.println("ENTROU -----------------");
+        String id = this.authService.validateToken(token.replace("Bearer ", ""));
+        System.out.println("id "+id);
+        List<StoryModel> listRes = storyService.findByIdOwner(id);
+        System.out.println("listRes "+listRes);
+        return listRes;
+    }
+
     @GetMapping("/{title}")
-    public List<StoryModel> getUserByTitle(@PathVariable String title) {
+    public List<StoryModel> getStoryByTitle(@PathVariable String title) {
         List<StoryModel> listRes = storyService.findByTitle(title);
         return listRes;
     }
@@ -59,7 +69,6 @@ public class StoryController {
         StoryModel story = new StoryModel(newStory);
         
         story.setIdOwner(new UserModel(id));
-        System.out.println("POSDZFJDSAPOFJASPO" + story);
         storyService.save(story);
     }
 

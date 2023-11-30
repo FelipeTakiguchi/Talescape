@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, StyleSheet, FlatList, Image, Dimensions, Pressable } from 'react-native';
+import "./styles.css"
 
 const windowHeight = Dimensions.get('window').height;
 const PopupMenu = () => {
@@ -35,14 +36,14 @@ const PopupMenu = () => {
                 onRequestClose={toggleModal}
                 presentationStyle="overFullScreen"
             >
-                    {isModalVisible && <Pressable onPress={toggleModal} style={{
-                        position: "fixed",
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        zIndex: 0,
-                        backgroundColor: "rgba(255, 255, 255, .2)",
+                    {isModalVisible && <Pressable onPress={toggleModal} id='blurBackground' style={{
+                        // position: "fixed",
+                        // top: 0,
+                        // left: 0,
+                        // width: "100%",
+                        // height: "100%",
+                        // zIndex: 0,
+                        // backgroundColor: "rgba(255, 255, 255, .2)",
                     }}>
                     </Pressable>}
                     <View style={styles.modalContainer}>

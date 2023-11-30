@@ -6,8 +6,8 @@ export default function Footer(props) {
 
     return (
         <View style={styles.footer}>
-            <Pressable>
-                <Image source={props.page == "pencil" ? require("../../assets/pencil icon.png") : require("../../assets/pencil icon.png")} style={styles.footerIcon}></Image>
+            <Pressable onPress={() => navigator.navigate('myPoems')}>
+                <Image source={props.page == "pencil" ? require("../../assets/pencil selected icon.png") : require("../../assets/pencil icon.png")} style={styles.footerIcon}></Image>
             </Pressable>
             <Pressable onPress={() => navigator.navigate('loved')}>
                 <Image source={props.page == "heart" ? require("../../assets/heart selected icon.png") : require("../../assets/heart icon.png")} style={styles.footerIcon}></Image>

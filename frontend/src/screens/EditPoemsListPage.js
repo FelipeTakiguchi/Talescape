@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import StoryService from "../Services/Story";
 import { useCallback, useState } from "react";
 
-export default function ExplorePage(props) {
+export default function EditPoemsListPage(props) {
     const [content, setContent] = useState([]);
     const navigator = useNavigation();
 
@@ -17,7 +17,7 @@ export default function ExplorePage(props) {
     );
 
     async function loadContent() {
-        const res = await StoryService.getAll();
+        const res = await StoryService.getByUser();
 
         if (res.status != 200) {
             navigator.navigate("home");
@@ -31,28 +31,19 @@ export default function ExplorePage(props) {
     return (
         <View style={GlobalStyles.centralize}>
             <View style={styles.content}>
-                <View style={styles.section}>
-                    <Pressable onPress={() => navigator.navigate("home")}>
-                        <Text style={styles.option}>Create</Text>
-                    </Pressable>
-                    <View style={styles.verticleLine}></View>
-                    <Pressable>
-                        <Text style={[styles.option, styles.selected]}>Explore</Text>
-                    </Pressable>
-                </View>
                 <ScrollView contentContainerStyle={styles.scrollViewContent} centerContent={true}>
                     {
                         content.map((content, key) => {
-                            return(
-                                <PoemCard key={key} title={content.title} text={content.text} 
-                                owner={content.idOwner == null ? "username" : content.idOwner.name} 
-                                updatedAt={new Date(content.updatedAt).toLocaleDateString("pt-br")}></PoemCard>
+                            return (
+                                <PoemCard personal={true} key={key} title={content.title} text={content.text}
+                                    owner={content.idOwner == null ? "username" : content.idOwner.name}
+                                    updatedAt={new Date(content.updatedAt).toLocaleDateString("pt-br")}></PoemCard>
                             )
                         })
                     }
                 </ScrollView>
             </View>
-            <Footer page="home"></Footer>
+            <Footer page="pencil"></Footer>
         </View>
     )
 }
