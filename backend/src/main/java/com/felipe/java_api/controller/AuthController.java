@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.felipe.java_api.dto.UserDTO;
 import com.felipe.java_api.model.UserModel;
 import com.felipe.java_api.service.AuthService;
 import com.felipe.java_api.service.UserService;

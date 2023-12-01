@@ -19,6 +19,7 @@ export default function StyledButton(props) {
         const name = props.username
         const email = props.email
         const password = props.password
+        console.log(props.password);
 
         const body = {
             name,

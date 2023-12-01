@@ -30,8 +30,6 @@ public class StoryController {
 
     @Autowired
     private AuthService authService;
-    @Autowired
-    private UserService userService;
 
     @GetMapping("")
     public List<StoryModel> getAllStory() {
@@ -42,7 +40,6 @@ public class StoryController {
 
     @GetMapping("/myPoems")
     public List<StoryModel> getStoryByUser(@RequestHeader("Authorization") String token) {
-        System.out.println("ENTROU -----------------");
         String id = this.authService.validateToken(token.replace("Bearer ", ""));
         System.out.println("id "+id);
         List<StoryModel> listRes = storyService.findByIdOwner(id);
@@ -83,6 +80,7 @@ public class StoryController {
 
     @DeleteMapping("/{id}")
     public void deleteStory(@PathVariable String id) {
+        System.out.println(id);
         storyService.delete(id);
     }
 

@@ -1,5 +1,6 @@
 package com.felipe.java_api.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.felipe.java_api.dto.UserDTO;
 import com.felipe.java_api.model.UserModel;
 import com.felipe.java_api.repository.UserRepository;
 
@@ -57,20 +59,41 @@ public class UserService {
         this.userRepository.save(new UserModel(id, name, dateOfBirth, biograpy));
     }
 
-    public List<UserModel> findAll() {
-        return (List<UserModel>) this.userRepository.findAll();
+    public List<UserDTO> findAll() {
+        List<UserDTO> userDTOs = new ArrayList<>();
+        
+        List<UserModel> users = this.userRepository.findAll();
+        for (UserModel userModel : users) {
+            UserDTO userDTO = new UserDTO(userModel.getName(), userModel.getBiograpy(), userModel.getDateOfBirth(), userModel.getEmail());
+            userDTOs.add(userDTO);
+        }
+        return userDTOs;
     }
 
-    public List<UserModel> findByName(String name) {
-        return (List<UserModel>) this.userRepository.findByName(name);
+    public List<UserDTO> findByName(String name) {
+        List<UserDTO> userDTOs = new ArrayList<>();
+        
+        List<UserModel> users = this.userRepository.findByName(name);
+        for (UserModel userModel : users) {
+            UserDTO userDTO = new UserDTO(userModel.getName(), userModel.getBiograpy(), userModel.getDateOfBirth(), userModel.getEmail());
+            userDTOs.add(userDTO);
+        }
+        return userDTOs;
     }
 
     public UserModel findByEmail(String email) {
-        return (UserModel) this.userRepository.findByEmail(email);
+         return this.userRepository.findByEmail(email);
     }
 
-    public List<UserModel> findByAgeAndName(short age, String name) {
-        return (List<UserModel>) this.userRepository.findByAgeAndName(age, name);
+    public List<UserDTO> findByAgeAndName(short age, String name) {
+        List<UserDTO> userDTOs = new ArrayList<>();
+        
+        List<UserModel> users = this.userRepository.findByAgeAndName(age, name);
+        for (UserModel userModel : users) {
+            UserDTO userDTO = new UserDTO(userModel.getName(), userModel.getBiograpy(), userModel.getDateOfBirth(), userModel.getEmail());
+            userDTOs.add(userDTO);
+        }
+        return userDTOs;
     }
 
     public void delete(String id) {

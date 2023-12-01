@@ -22,10 +22,13 @@ export default function EditPoemsListPage(props) {
         if (res.status != 200) {
             navigator.navigate("home");
         }
-        if (res.data) {
-            setContent(res.data)
-            console.log(res.data);
-        }
+        setContent(res.data)
+    }
+
+    function updateContent(index) {
+        const updatedContent = [...content];
+        updatedContent.splice(index, 1);
+        setContent(updatedContent);
     }
 
     return (
@@ -35,9 +38,9 @@ export default function EditPoemsListPage(props) {
                     {
                         content.map((content, key) => {
                             return (
-                                <PoemCard personal={true} key={key} title={content.title} text={content.text}
+                                <PoemCard personal={true} key={key} index={key} id={content.id} title={content.title} text={content.text}
                                     owner={content.idOwner == null ? "username" : content.idOwner.name}
-                                    updatedAt={new Date(content.updatedAt).toLocaleDateString("pt-br")}></PoemCard>
+                                    updatedAt={new Date(content.updatedAt).toLocaleDateString("pt-br")} remove={updateContent}></PoemCard>
                             )
                         })
                     }

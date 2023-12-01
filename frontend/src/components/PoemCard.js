@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Image, Pressable, StyleSheet, View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import StoryService from "../Services/Story";
 
 export default function PoemCard(props) {
     const navigateion = useNavigation();
     const [modalVisible, setModalVisible] = useState(false);
+    const [lines, setLines] = useState(4)
 
     const setVisible = () => {
         setModalVisible(!modalVisible);
@@ -14,20 +16,32 @@ export default function PoemCard(props) {
         navigateion.navigate(screen);
     }
 
+    async function deletePoem() {
+        const res = await StoryService.delete(props.id);
+        props.remove(props.index);
+    }
+
+    function breakLimit() {
+        console.log("oi");
+        setLines(null)
+    }
+
     if (props.personal) {
         return (
-            <View style={[styles.personalCard, props.viewed ? styles.lightPurple : styles.darkPurple]}>
-                <View style={styles.cardContent}>
-                    <Text style={styles.title}>{props.title}</Text>
-                    <Text style={styles.datePosition}>{props.updatedAt}</Text>
-                    <Text style={styles.text}>{props.text}</Text>
-                </View>
-                <View style={[styles.floatingTag, styles.middle, props.viewed ? styles.white : styles.purple]}>
+            <View style={styles.relative}>
+                <View style={[styles.floatingTag, styles.topLeft, props.viewed ? styles.white : styles.purple]}>
                     <Text style={[styles.tagText, props.viewed ? styles.darkFont : styles.lightFont]}>História</Text>
                 </View>
-                <Pressable style={[styles.floatingTag, styles.right, props.viewed ? styles.white : styles.purple]}>
-                    <Image source={require("../../assets/trash icon.png")} style={styles.floatingDeleteButton}></Image>
-                </Pressable>
+                <View style={[styles.personalCard, props.viewed ? styles.lightPurple : styles.darkPurple]}>
+                    <View style={styles.cardContent}>
+                        <Text style={styles.title}>{props.title}</Text>
+                        <Text style={styles.datePosition}>{props.updatedAt}</Text>
+                        <Text style={styles.text} numberOfLines={lines}>{props.text}</Text>
+                    </View>
+                    <Pressable style={styles.positionDelete} onPress={deletePoem}>
+                        <Image source={require("../../assets/trash icon.png")} style={styles.deleteButton}></Image>
+                    </Pressable>
+                </View>
             </View>
         )
     }
@@ -42,8 +56,10 @@ export default function PoemCard(props) {
             <View style={[styles.horizontalLine, props.viewed ? styles.white : styles.pink]}></View>
             <View style={styles.cardContent}>
                 <Text style={styles.title}>{props.title}</Text>
-                <Text style={styles.text}>{props.text}</Text>
-                <Image source={require("../../assets/arrowDown icon.png")} style={styles.showMore}></Image>
+                <Text style={styles.text} numberOfLines={lines}>{props.text}</Text>
+                {lines == 4 && <Pressable onPress={breakLimit}>
+                    <Image source={require("../../assets/arrowDown icon.png")} style={styles.showMore}></Image>
+                </Pressable>}
             </View>
             <View style={[styles.horizontalLine, props.viewed ? styles.white : styles.pink]}></View>
             <View style={styles.bottomCard}>
@@ -59,11 +75,15 @@ export default function PoemCard(props) {
 }
 
 const styles = StyleSheet.create({
-    personalCard: {
+    relative: {        
+        position: 'relative',
         width: "80%",
+    },
+    personalCard: {
         borderRadius: 15,
         marginBottom: 30,
         paddingBottom: 30,
+        zIndex: 2,
     },
     card: {
         width: "80%",
@@ -129,12 +149,13 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         color: '#fcfcfc',
         marginLeft: 30,
-        marginRight: 20
+        marginRight: 20,
+        marginBottom: 10,
     },
     showMore: {
         width: 18,
         height: 12,
-        margin: 10,
+        marginBottom: 10,
         alignSelf: 'center'
     },
     bottomCard: {
@@ -162,15 +183,16 @@ const styles = StyleSheet.create({
             height: 6,
         },
         shadowRadius: 5,
-        shadowOpacity: .3
+        shadowOpacity: .3,
+        zIndex: 1
     },
     right: {
         bottom: -15,
         right: -18,
     },
-    middle: {
-        bottom: -15,
-        left: "36%"
+    topLeft: {
+        top: -32,
+        left: 12,
     },
     tagText: {
         fontSize: 18,
@@ -182,8 +204,13 @@ const styles = StyleSheet.create({
     darkFont: {
         color: "#170536",
     },
-    floatingDeleteButton: {
+    deleteButton: {
         width: 20,
         height: 25,
+    },
+    positionDelete: {
+        position: "absolute",
+        right: 14,
+        bottom: 5
     }
 })

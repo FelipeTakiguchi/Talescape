@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.felipe.java_api.dto.UserDTO;
 import com.felipe.java_api.model.UserModel;
 import com.felipe.java_api.service.UserService;
 
@@ -24,8 +25,8 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("")
-    public List<UserModel> getAllUser() {
-        List<UserModel> listRes = userService.findAll();
+    public List<UserDTO> getAllUser() {
+        List<UserDTO> listRes = userService.findAll();
         return listRes;
     }
 
@@ -35,14 +36,14 @@ public class UserController {
     // }
 
     @GetMapping("/{name}")
-    public List<UserModel> getUserByName(@PathVariable String name) {
-        List<UserModel> listRes = userService.findByName(name);
+    public List<UserDTO> getUserByName(@PathVariable String name) {
+        List<UserDTO> listRes = userService.findByName(name);
         return listRes;
     }
 
     @GetMapping("/{age}/{name}")
-    public List<UserModel> getUserByAgeAndName(@PathVariable short age, @PathVariable String name) {
-        List<UserModel> listRes = userService.findByAgeAndName(age, name);
+    public List<UserDTO> getUserByAgeAndName(@PathVariable short age, @PathVariable String name) {
+        List<UserDTO> listRes = userService.findByAgeAndName(age, name);
         return listRes;
     }
 

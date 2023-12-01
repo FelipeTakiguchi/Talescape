@@ -14,6 +14,6 @@ public class JavaApiApplication {
 
 /*
 jwt.issuer=com.felipe
-jwt.secret=senhaultrasecreta
+jwt.secret=senhaultrasecretanpm start
 MONGO_STRING_URI=mongodb+srv://felipentakiguchi:jhfBMBZ4r6s8ZtUp@cluster0.vprguda.mongodb.net/Talescape
  */
