@@ -24,7 +24,6 @@ export default function ExplorePage(props) {
         }
         if (res.data) {
             setContent(res.data)
-            console.log(res.data);
         }
     }
 
@@ -44,8 +43,10 @@ export default function ExplorePage(props) {
                     {
                         content.map((content, key) => {
                             return(
-                                <PoemCard key={key} title={content.title} text={content.text} 
-                                owner={content.idOwner == null ? "username" : content.idOwner.name} 
+                                <PoemCard key={key} id={content.id} title={content.title} text={content.text} 
+                                owner={content.idOwner == null ? "username" : content.idOwner.name}
+                                likes={content.likes}
+                                createdAt={new Date(content.createdAt).toLocaleDateString("pt-br")} 
                                 updatedAt={new Date(content.updatedAt).toLocaleDateString("pt-br")}></PoemCard>
                             )
                         })

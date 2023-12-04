@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
     scrollViewContent: {
         marginTop: 15,
         alignItems: 'center',
-        marginBottom: 40
+        marginBottom: 40,
+        gap: 20
     },
     section: {
         backgroundColor: "#763FEA",

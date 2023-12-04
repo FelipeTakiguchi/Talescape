@@ -24,7 +24,6 @@ public class AuthController {
 
     @PostMapping("/register")
     public String register(@RequestBody UserModel user) {
-        System.out.println("------------------------------- " + user);
         try {
             this.userService.save(user);
         } catch (Exception e) {

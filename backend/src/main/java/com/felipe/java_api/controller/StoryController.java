@@ -1,5 +1,6 @@
 package com.felipe.java_api.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,12 +39,18 @@ public class StoryController {
         return listRes;
     }
 
+    @GetMapping("/loved")
+    public List<StoryModel> getStoryLoved(@RequestHeader("Authorization") String token) {
+        String id = this.authService.validateToken(token.replace("Bearer ", ""));
+        List<StoryModel> listRes = storyService.findByLoved(id);
+
+        return listRes;
+    }
+
     @GetMapping("/myPoems")
     public List<StoryModel> getStoryByUser(@RequestHeader("Authorization") String token) {
         String id = this.authService.validateToken(token.replace("Bearer ", ""));
-        System.out.println("id "+id);
         List<StoryModel> listRes = storyService.findByIdOwner(id);
-        System.out.println("listRes "+listRes);
         return listRes;
     }
 
@@ -62,9 +69,9 @@ public class StoryController {
     @PostMapping("")
     public void newStory(@RequestBody StoryModel newStory, @RequestHeader("Authorization") String token) {
         String id = this.authService.validateToken(token.replace("Bearer ", ""));
-        
+
         StoryModel story = new StoryModel(newStory);
-        
+
         story.setIdOwner(new UserModel(id));
         storyService.save(story);
     }
@@ -76,6 +83,61 @@ public class StoryController {
                 (List<String>) newStory.getSubCategories(), (UserModel) newStory.getIdOwner(),
                 (Boolean) newStory.getViewed(), (List<UserModel>) newStory.getLikes(), (Date) newStory.getCreatedAt(),
                 (Date) newStory.getUpdatedAt());
+    }
+
+    @PostMapping("/like")
+    public void likeStory(@RequestBody String storyId, @RequestHeader("Authorization") String token) {
+        String id = this.authService.validateToken(token.replace("Bearer ", ""));
+
+        storyId = storyId.split("=")[0];
+
+        StoryModel newStory = storyService.findById(storyId);
+
+        List<UserModel> likes = new ArrayList();
+
+        if (newStory.getLikes() != null)
+            likes = newStory.getLikes();
+
+        int find = -1;
+        UserModel user = new UserModel(id);
+
+        if (likes != null) {
+            for (int i = 0; i < likes.size(); i++) {
+                if (likes.get(i).getId().compareTo(user.getId()) == 0) {
+                    find = i;
+                }
+            }
+        }
+
+        if (find >= 0)
+            likes.remove(find);
+        else
+            likes.add(user);
+
+        newStory.setLikes(likes);
+
+        storyService.save((String) newStory.getId(), (String) newStory.getTitle(), (String) newStory.getText(),
+                (List<ContentModel>) newStory.getElements(), (String) newStory.getCategory(),
+                (List<String>) newStory.getSubCategories(), (UserModel) newStory.getIdOwner(),
+                (Boolean) newStory.getViewed(), (List<UserModel>) newStory.getLikes(), (Date) newStory.getCreatedAt(),
+                (Date) newStory.getUpdatedAt());
+    }
+
+    @PostMapping("/hasLike")
+    public Boolean hasLike(@RequestBody List<String> likes, @RequestHeader("Authorization") String token) {
+        System.out.println("Entreeeei");
+        String id = this.authService.validateToken(token.replace("Bearer ", ""));
+
+        System.out.println(likes);
+        Boolean liked = false;
+
+        for (String like : likes) {
+            if(like.compareTo(id) == 0){
+                liked = true;
+            }
+        }
+        
+        return liked;
     }
 
     @DeleteMapping("/{id}")

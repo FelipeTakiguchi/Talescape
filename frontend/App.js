@@ -29,7 +29,7 @@ export default function App() {
           <Stack.Screen name="cadastro" options={{ headerShown: false }} component={Cadastro} />
           <Stack.Screen name="home" component={HomePage} />
           <Stack.Screen name="myPoems" component={EditPoemsListPage} />
-          <Stack.Screen name="editProfile" options={{ headerShown: false }} component={EditProfilePage} />
+          <Stack.Screen name="editProfile" component={EditProfilePage} />
           <Stack.Screen name="explore" component={ExplorePage} />
           <Stack.Screen name="loved" component={LovedPage} />
           <Stack.Screen name="createPoem" options={{ headerShown: false }} component={CreatePoemPage} />

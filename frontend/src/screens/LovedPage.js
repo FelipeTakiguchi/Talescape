@@ -1,26 +1,54 @@
-import { View, StyleSheet, Pressable, Image, Text, ScrollView } from "react-native"
+import { View, StyleSheet, ScrollView, Text } from "react-native"
 import { GlobalStyles } from "../../Styles"
-import StyledButton from "../components/StyledButton"
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import PoemCard from "../components/PoemCard";
 import Footer from "../components/Footer";
+import { useCallback, useState } from "react";
+import StoryService from "../Services/Story";
 
 export default function LovedPage(props) {
 
+    const [content, setContent] = useState([]);
     const navigator = useNavigation();
+
+    useFocusEffect(
+        useCallback(() => {
+            loadContent()
+        }, [])
+    );
+
+    async function loadContent() {
+        const res = await StoryService.getLoved();
+
+        if (res.status != 200) {
+            navigator.navigate("home");
+        }
+        if (res.data) {
+            setContent(res.data)
+            console.log(res.data);
+        }
+    }
 
     return (
         <View style={GlobalStyles.centralize}>
             <View style={styles.content}>
-                <View style={styles.centralize}>
-                    <Image source={require("../../assets/heart button.png")} style={styles.heartIcon}></Image>
-                    <View style={styles.baseLine}></View>
-                </View>
                 <ScrollView contentContainerStyle={styles.scrollViewContent} centerContent={true}>
-                    <PoemCard viewed={true} loved={true} expanded={false}></PoemCard>
-                    <PoemCard viewed={true} loved={true} expanded={false}></PoemCard>
-                    <PoemCard viewed={true} loved={true} expanded={false}></PoemCard>
-                    <PoemCard viewed={true} loved={true} expanded={false}></PoemCard>
+                    {
+                        content.length == 0 && <Text>
+                            No Liked Content, like other new Poems to see them here.
+                        </Text>
+                    }
+                    {
+                        content.map((content, key) => {
+                            return(
+                                <PoemCard key={key} id={content.id} title={content.title} text={content.text} 
+                                owner={content.idOwner == null ? "username" : content.idOwner.name}
+                                likes={content.likes}
+                                createdAt={new Date(content.createdAt).toLocaleDateString("pt-br")} 
+                                updatedAt={new Date(content.updatedAt).toLocaleDateString("pt-br")}></PoemCard>
+                            )
+                        })
+                    }
                 </ScrollView>
             </View>
             <Footer page="heart"></Footer>
@@ -46,21 +74,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#EFEFEF",
         height: '90vh',
         width: "100%",
-    }, 
-    centralize: {
-        alignItems: 'center',
-        gap: 5,
-        marginTop: 10
-    },
-    heartIcon: {
-        width: 30,
-        height: 31,
-    },
-    baseLine: {
-        borderColor: "#2A0C5F",
-        borderWidth: 0,
-        borderTopWidth: 2,
-        width: 100,
     },
     scrollViewContent: {
         marginTop: 15,

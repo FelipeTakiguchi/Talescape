@@ -32,6 +32,12 @@ public interface StoryRepository extends MongoRepository<StoryModel, String> {
     // quantity: { $in: [20, 50] } } -> quantidade dentro dos valores do array 20 ou
     // 50
 
+    @Query("{'_id': ?0}")
+    StoryModel findbyId(String id);
+
+    @Query("{'likes.id': ?0}")
+    List<StoryModel> findLoved(String id);
+
     @Query("{'idOwner.id': ?0}")
     List<StoryModel> findByIdOwner(String id);
 

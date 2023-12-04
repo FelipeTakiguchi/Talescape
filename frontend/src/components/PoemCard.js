@@ -1,19 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Image, Pressable, StyleSheet, View, Text } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import StoryService from "../Services/Story";
 
 export default function PoemCard(props) {
-    const navigateion = useNavigation();
-    const [modalVisible, setModalVisible] = useState(false);
+    const [liked, setLiked] = useState(false);
     const [lines, setLines] = useState(4)
+    const [totalLikes, setTotalLikes] = useState(0);
 
-    const setVisible = () => {
-        setModalVisible(!modalVisible);
-    }
+    useEffect(() => {
+        loadLikes();
+    }, []);
 
-    const navigate = (screen) => {
-        navigateion.navigate(screen);
+    async function loadLikes() {
+        if (props.likes != null) {
+            console.log(props.likes);
+            let users = [];
+
+            props.likes.forEach(like => {
+                users.push(like.id);
+            });
+            console.log(users);
+            const res = await StoryService.hasLike(users);
+            setLiked(res.data);
+            setTotalLikes(props.likes.length);
+        }
     }
 
     async function deletePoem() {
@@ -22,8 +32,20 @@ export default function PoemCard(props) {
     }
 
     function breakLimit() {
-        console.log("oi");
         setLines(null)
+    }
+
+    function hide() {
+        setLines(4)
+    }
+
+    async function giveLike() {
+        const res = await StoryService.like(props.id);
+        setLiked(!liked)
+        if(liked)
+            setTotalLikes(totalLikes - 1);
+        else
+            setTotalLikes(totalLikes + 1);
     }
 
     if (props.personal) {
@@ -60,10 +82,16 @@ export default function PoemCard(props) {
                 {lines == 4 && <Pressable onPress={breakLimit}>
                     <Image source={require("../../assets/arrowDown icon.png")} style={styles.showMore}></Image>
                 </Pressable>}
+                {lines != 4 && <Pressable onPress={hide}>
+                    <Image source={require("../../assets/arrowUp icon.png")} style={styles.showMore}></Image>
+                </Pressable>}
             </View>
             <View style={[styles.horizontalLine, props.viewed ? styles.white : styles.pink]}></View>
             <View style={styles.bottomCard}>
-                <Image source={props.loved ? require("../../assets/heart button.png") : require("../../assets/heart icon.png")} style={styles.loveIcon}></Image>
+                <Text style={styles.totalLikes}>{totalLikes}</Text>
+                <Pressable onPress={giveLike}>
+                    <Image source={liked ? require("../../assets/heart button.png") : require("../../assets/heart icon.png")} style={styles.loveIcon}></Image>
+                </Pressable>
                 <Text style={styles.categoryFont}>Categoria 1</Text>
                 <Text style={styles.categoryFont}>Categoria 2</Text>
             </View>
@@ -75,7 +103,7 @@ export default function PoemCard(props) {
 }
 
 const styles = StyleSheet.create({
-    relative: {        
+    relative: {
         position: 'relative',
         width: "80%",
     },
@@ -164,9 +192,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         gap: 8
     },
+    totalLikes: {
+        color: "#fcfcfc",
+        fontSize: 22,
+        fontWeight: '600'
+    },
     loveIcon: {
         width: 22,
         height: 23,
+        marginTop: 4.5,
+        marginRight: 8
     },
     categoryFont: {
         marginTop: "1%",

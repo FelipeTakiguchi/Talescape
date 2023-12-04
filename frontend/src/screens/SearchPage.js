@@ -1,15 +1,35 @@
 import { View, StyleSheet, Pressable, Image, Text, ScrollView, TextInput, Dimensions } from "react-native"
 import { GlobalStyles } from "../../Styles"
 import StyledButton from "../components/StyledButton"
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import PoemCard from "../components/PoemCard";
 import Footer from "../components/Footer";
+import { useCallback, useState } from "react";
+import StoryService from "../Services/Story";
 
 export default function SearchPage(props) {
 
+    const [content, setContent] = useState([]);
     const navigator = useNavigation();
 
-    return (
+    useFocusEffect(
+        useCallback(() => {
+            loadContent()
+        }, [])
+    );
+
+    async function loadContent() {
+        const res = await StoryService.getAll();
+
+        if (res.status != 200) {
+            navigator.navigate("home");
+        }
+        if (res.data) {
+            setContent(res.data)
+        }
+    }
+
+    return (    
         <View style={GlobalStyles.centralize}>
             <View style={styles.content}>
                 <View style={styles.searchBox}>
@@ -19,10 +39,17 @@ export default function SearchPage(props) {
                     </Pressable>
                 </View>
                 <ScrollView contentContainerStyle={styles.scrollViewContent} centerContent={true}>
-                    <PoemCard viewed={true} loved={true} expanded={false}></PoemCard>
-                    <PoemCard viewed={true}></PoemCard>
-                    <PoemCard></PoemCard>
-                    <PoemCard></PoemCard>
+                    {
+                        content.map((content, key) => {
+                            return (
+                                <PoemCard key={key} id={content.id} title={content.title} text={content.text}
+                                    owner={content.idOwner == null ? "username" : content.idOwner.name}
+                                    likes={content.likes}
+                                    createdAt={new Date(content.createdAt).toLocaleDateString("pt-br")}
+                                    updatedAt={new Date(content.updatedAt).toLocaleDateString("pt-br")}></PoemCard>
+                            )
+                        })
+                    }
                 </ScrollView>
             </View>
             <Footer page="search"></Footer>
@@ -46,8 +73,8 @@ const styles = StyleSheet.create({
     content: {
         marginTop: 10,
         backgroundColor: "#EFEFEF",
-        width: "100%",
         height: '90vh',
+        width: "100%",
     },
     searchBox: {
         flexDirection: 'row',
@@ -70,6 +97,26 @@ const styles = StyleSheet.create({
         marginTop: 15,
         alignItems: 'center',
         marginBottom: 40
+    },
+    section: {
+        backgroundColor: "#763FEA",
+        width: "100%",
+        gap: "17%",
+        justifyContent: 'center',
+        flexDirection: 'row',
+        padding: 10,
+        shadowColor: '#171717',
+        shadowOffset: { width: -2, height: 6 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+    },
+    option: {
+        color: "#fcfcfc",
+        fontSize: 17,
+        fontWeight: '600'
+    },
+    selected: {
+        color: "#C395A6"
     },
     verticleLine: {
         height: '100%',

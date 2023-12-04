@@ -12,10 +12,6 @@ export default function EditProfilePage(props) {
 
     return (
         <View style={GlobalStyles.centralize}>
-            <Image source={require("../../assets/Talescape Simple Logo.png")} style={styles.imageHeader} />
-            <Pressable style={styles.menuHeader}>
-                <Image source={require("../../assets/menu icon.png")} style={styles.menuHeader} />
-            </Pressable>
             <View style={styles.content}>
                 <Text style={styles.label}>Biografia</Text>
                 <TextInput
